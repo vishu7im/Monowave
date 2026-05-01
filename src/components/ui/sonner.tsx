@@ -48,15 +48,15 @@ const Toaster = ({ ...props }: ToasterProps) => {
       }}
       style={
         {
-          "--normal-bg": isDark ? "#1C1C1F" : "#ffffff",
-          "--normal-text": isDark ? "#F4F4F5" : "#111111",
-          "--normal-border": isDark ? "#2E2E35" : "#E5E5E5",
-          "--success-bg": isDark ? "#1C1C1F" : "#ffffff",
-          "--success-text": isDark ? "#F4F4F5" : "#111111",
-          "--success-border": isDark ? "#2E2E35" : "#E5E5E5",
-          "--error-bg": isDark ? "#1C1C1F" : "#ffffff",
-          "--error-text": isDark ? "#F4F4F5" : "#111111",
-          "--error-border": isDark ? "#2E2E35" : "#E5E5E5",
+          "--normal-bg": "#0f172a",
+          "--normal-text": "#e2e8f0",
+          "--normal-border": "rgba(255,255,255,0.12)",
+          "--success-bg": "#0f172a",
+          "--success-text": "#e2e8f0",
+          "--success-border": "rgba(255,255,255,0.12)",
+          "--error-bg": "#0f172a",
+          "--error-text": "#e2e8f0",
+          "--error-border": "rgba(255,255,255,0.12)",
           "--border-radius": "14px",
           "--toast-width": "340px",
           fontFamily: "var(--font-sans)",
@@ -66,20 +66,16 @@ const Toaster = ({ ...props }: ToasterProps) => {
         classNames: {
           toast: [
             "shadow-xl border px-4 py-3.5 gap-3",
-            isDark
-              ? "bg-[#1C1C1F] border-[#2E2E35] text-zinc-100 shadow-black/50"
-              : "bg-white border-[#E5E5E5] text-[#111111] shadow-black/8",
+            "bg-slate-950/95 border-white/10 text-slate-100 shadow-black/50 backdrop-blur-xl",
           ].join(" "),
           title: "text-sm font-medium leading-snug",
           description: "text-xs leading-relaxed mt-0.5",
           closeButton: [
             "!border rounded-full !size-5 transition-colors",
-            isDark
-              ? "!bg-zinc-800 !border-zinc-700 hover:!bg-zinc-700 !text-zinc-400"
-              : "!bg-zinc-100 !border-zinc-200 hover:!bg-zinc-200 !text-zinc-500",
+            "!bg-white/[0.06] !border-white/10 hover:!bg-cyan-300/10 !text-slate-400",
           ].join(" "),
           actionButton:
-            "!bg-[#B54B00] !text-white hover:!bg-[#9E4200] !border-0 !rounded-lg !text-xs !font-medium !px-3 !h-7 !shadow-[inset_0px_1px_2px_rgba(255,255,255,0.15)]",
+            "!bg-cyan-300 !text-slate-950 hover:!bg-cyan-200 !border-0 !rounded-lg !text-xs !font-medium !px-3 !h-7 !shadow-[inset_0px_1px_2px_rgba(255,255,255,0.28)]",
           icon: "mt-0.5",
         },
       }}

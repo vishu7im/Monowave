@@ -64,7 +64,7 @@ export function PreviewStage() {
     const newDark = !document.documentElement.classList.contains("dark");
     document.documentElement.classList.toggle("dark", newDark);
     localStorage.setItem("studio-theme", newDark ? "dark" : "light");
-    patchAppearance({ backgroundColor: newDark ? "#0B0B0D" : "#ffffff" });
+    patchAppearance({ backgroundColor: newDark ? "#050814" : "#08111F" });
   };
 
   const cellWidth = appearance.fontSize * 0.6 + appearance.letterSpacing;
@@ -80,14 +80,14 @@ export function PreviewStage() {
   return (
     <div className="flex h-full flex-col overflow-hidden">
       {/* ── Header strip ─────────────────────────────────────────────── */}
-      <div className="flex h-12 shrink-0 items-center justify-between gap-3 border-b border-[#E5E5E5] dark:border-zinc-800 bg-[linear-gradient(180deg,#FFFFFF_0%,#F9FAFC_100%)] dark:bg-[linear-gradient(180deg,#18181b_0%,#18181b_100%)] px-6">
+      <div className="flex h-12 shrink-0 items-center justify-between gap-3 border-b border-white/10 bg-white/[0.045] px-6 backdrop-blur-xl">
         <div className="flex items-center gap-2">
           <div className="flex items-center gap-1.5">
-            <div className="size-3 rounded-full border border-[#D6D6D6] dark:border-zinc-600 bg-white dark:bg-zinc-700 shadow-[0px_0.5px_0_rgba(0,0,0,0.06)]" />
-            <div className="size-3 rounded-full border border-[#D6D6D6] dark:border-zinc-600 bg-white dark:bg-zinc-700 shadow-[0px_0.5px_0_rgba(0,0,0,0.06)]" />
-            <div className="size-3 rounded-full border border-[#D6D6D6] dark:border-zinc-600 bg-white dark:bg-zinc-700 shadow-[0px_0.5px_0_rgba(0,0,0,0.06)]" />
+            <div className="size-3 rounded-full border border-cyan-200/30 bg-cyan-300/50 shadow-[0_0_14px_rgba(34,211,238,0.45)]" />
+            <div className="size-3 rounded-full border border-violet-200/30 bg-violet-300/45" />
+            <div className="size-3 rounded-full border border-emerald-200/30 bg-emerald-300/45" />
           </div>
-          <span className="ml-2 font-mono text-[10px] font-medium uppercase tracking-widest text-[#888] dark:text-zinc-500">
+          <span className="ml-2 font-mono text-[10px] font-medium uppercase tracking-widest text-slate-500">
             Preview
           </span>
         </div>
@@ -119,7 +119,7 @@ export function PreviewStage() {
               aria-label={VIDEO_PLAYBACK_HINT}
               className={cn(
                 STUDIO_OUTLINE_TERTIARY,
-                "h-8 min-w-0 gap-2 rounded-full px-4 font-mono text-[10px] uppercase tracking-widest text-[#111] dark:text-zinc-300 opacity-60",
+                "h-8 min-w-0 gap-2 rounded-full px-4 font-mono text-[10px] uppercase tracking-widest text-slate-300 opacity-60",
               )}
             >
               <Play className="size-3.5 shrink-0 opacity-80" />
@@ -147,8 +147,8 @@ export function PreviewStage() {
       </div>
 
       {/* ── Stage ─────────────────────────────────────────────────────── */}
-      <div className="flex-1 min-h-0 bg-[#F9FAFC] dark:bg-zinc-950 p-4 sm:p-6">
-        <div className="h-full w-full overflow-hidden rounded-2xl border border-[#D4D4D4] dark:border-zinc-700 bg-zinc-950 shadow-[inset_0_2px_8px_rgba(0,0,0,0.35)]">
+      <div className="flex-1 min-h-0 bg-slate-950/30 p-4 sm:p-6">
+        <div className="h-full w-full overflow-hidden rounded-[1.5rem] border border-cyan-300/15 bg-slate-950 shadow-[inset_0_0_50px_rgba(34,211,238,0.08),0_20px_80px_rgba(2,6,23,0.38)]">
           {source ? (
             <AsciiCanvas ref={canvasRef} className="block h-full w-full" />
           ) : (
@@ -161,8 +161,8 @@ export function PreviewStage() {
 
       {/* ── Video scrubber ───────────────────────────────────────────── */}
       {isVideo && (
-        <div className="flex shrink-0 items-center gap-4 border-t border-[#E5E5E5] dark:border-zinc-800 bg-white dark:bg-zinc-900 px-6 py-4">
-          <span className="font-mono text-[10px] uppercase tracking-widest text-[#888] dark:text-zinc-500">
+        <div className="flex shrink-0 items-center gap-4 border-t border-white/10 bg-white/[0.045] px-6 py-4 backdrop-blur-xl">
+          <span className="font-mono text-[10px] uppercase tracking-widest text-slate-500">
             Scrub
           </span>
           <Slider
@@ -173,7 +173,7 @@ export function PreviewStage() {
             step={1}
             onValueChange={([v]) => v !== undefined && setFrame(v)}
           />
-          <span className="w-24 shrink-0 text-right font-mono text-xs tabular-nums text-[#111] dark:text-zinc-100">
+          <span className="w-24 shrink-0 text-right font-mono text-xs tabular-nums text-slate-100">
             {String(currentFrame + 1).padStart(3, "0")} /{" "}
             {String(totalFrames || 1).padStart(3, "0")}
           </span>
@@ -181,7 +181,7 @@ export function PreviewStage() {
       )}
 
       {/* ── Stats footer ─────────────────────────────────────────────── */}
-      <div className="grid shrink-0 grid-cols-2 divide-x divide-y divide-[#E5E5E5] dark:divide-zinc-800 border-t border-[#E5E5E5] dark:border-zinc-800 bg-white dark:bg-zinc-900 sm:grid-cols-4 sm:divide-y-0">
+      <div className="grid shrink-0 grid-cols-2 divide-x divide-y divide-white/10 border-t border-white/10 bg-white/[0.045] sm:grid-cols-4 sm:divide-y-0">
         <StatCell
           label="Mode"
           value={mode.charAt(0).toUpperCase() + mode.slice(1)}
@@ -203,10 +203,10 @@ export function PreviewStage() {
 function StatCell({ label, value }: { label: string; value: string }) {
   return (
     <div className="flex min-w-0 flex-col gap-1 p-4">
-      <span className="font-mono text-[10px] font-medium uppercase tracking-widest text-[#888] dark:text-zinc-500">
+      <span className="font-mono text-[10px] font-medium uppercase tracking-widest text-slate-500">
         {label}
       </span>
-      <span className="truncate font-mono text-sm font-semibold tabular-nums text-[#111] dark:text-zinc-100">
+      <span className="truncate font-mono text-sm font-semibold tabular-nums text-slate-100">
         {value}
       </span>
     </div>
@@ -216,16 +216,16 @@ function StatCell({ label, value }: { label: string; value: string }) {
 function EmptyState() {
   return (
     <div className="flex select-none flex-col items-center gap-6 text-center">
-      <div className="flex size-20 items-center justify-center rounded-3xl border border-dashed border-[#B54B00]/35 bg-[#F9FAFC] dark:bg-zinc-900">
-        <span className="font-mono text-3xl font-black text-[#B54B00]/40">
+      <div className="flex size-20 items-center justify-center rounded-3xl border border-dashed border-cyan-300/35 bg-cyan-300/10">
+        <span className="font-mono text-3xl font-black text-cyan-200/60">
           A_
         </span>
       </div>
       <div className="space-y-2">
-        <p className="font-sans text-base font-bold tracking-tight text-[#111] dark:text-zinc-100">
+        <p className="font-sans text-base font-bold tracking-tight text-slate-100">
           No source loaded
         </p>
-        <p className="font-mono text-[10px] uppercase tracking-widest text-[#666] dark:text-zinc-500">
+        <p className="font-mono text-[10px] uppercase tracking-widest text-slate-500">
           Drop an image or video in the sidebar
         </p>
       </div>

@@ -1,380 +1,152 @@
 "use client";
-import { Check } from "lucide-react";
-import React, { useEffect, useRef, useState } from "react";
-import { AnimatePresence, motion, type Variants } from "framer-motion";
-import { useTheme } from "@/components/theme-provider";
+
+import { Check, Sparkles } from "lucide-react";
+import { motion } from "framer-motion";
+import { useState } from "react";
+
+import { Button } from "@/components/ui/button";
 import { DmOnXButton } from "@/components/landing-ui/dm-on-x-button";
 
-const ASCII_FREE = [
-  " ░░░░░░░░░░░░░ ",
-  "░  ▒▒▒▒▒▒▒▒▒  ░",
-  "░ ▒  ·  ·  ▒ ░",
-  "░ ▒  ASCII  ▒ ░",
-  "░ ▒  STUDIO ▒ ░",
-  "░  ▒▒▒▒▒▒▒▒▒  ░",
-  " ░░░░░░░░░░░░░ ",
-];
-
-const ASCII_PRO = [
-  "╔═══════════════╗",
-  "║  ┌─────────┐  ║",
-  "║  │ ▓▓▓▓▓▓▓ │  ║",
-  "║  │ ▓ PRO ▓ │  ║",
-  "║  │ ▓▓▓▓▓▓▓ │  ║",
-  "║  └─────────┘  ║",
-  "╚═══════════════╝",
-];
-
-const AsciiVisual = ({ tier }: { tier: "monthly" | "yearly" }) => {
-  const frames = tier === "yearly" ? ASCII_PRO : ASCII_FREE;
-  const [activeRow, setActiveRow] = useState(0);
-  const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
-
-  useEffect(() => {
-    intervalRef.current = setInterval(() => {
-      setActiveRow((p) => (p + 1) % frames.length);
-    }, 380);
-    return () => {
-      if (intervalRef.current) clearInterval(intervalRef.current);
-    };
-  }, [frames.length]);
-
-  return (
-    <div className="h-full w-full flex items-center justify-center p-4">
-      <pre
-        className="select-none leading-relaxed text-sm font-mono"
-        style={{ color: tier === "yearly" ? "#B54B00" : "#888" }}
-      >
-        {frames.map((row, i) => (
-          <div
-            key={i}
-            style={{
-              opacity: i === activeRow ? 1 : 0.45,
-              fontWeight: i === activeRow ? 700 : 400,
-              transition: "opacity 0.3s ease, font-weight 0.3s ease",
-            }}
-          >
-            {row}
-          </div>
-        ))}
-      </pre>
-    </div>
-  );
+const tiers = {
+  monthly: {
+    label: "Monthly",
+    price: "$12",
+    note: "For active creators testing commercial exports.",
+    points: [
+      "High-quality image and frame exports",
+      "React component export",
+      "Core style and effect presets",
+      "Watermarked video outputs",
+      "Standard support",
+    ],
+  },
+  yearly: {
+    label: "Yearly",
+    price: "$96",
+    note: "For teams and creators who export often.",
+    points: [
+      "Everything in monthly",
+      "No watermark on outputs",
+      "Premium style packs",
+      "Priority rendering queue",
+      "Early access to batch tools",
+    ],
+  },
 };
 
 const Pricing = () => {
-  const sideColumnWidthPx = 260;
-  const [isPricingPanelHovered, setIsPricingPanelHovered] = useState(false);
   const [activeTab, setActiveTab] = useState<"monthly" | "yearly">("monthly");
-  const { theme } = useTheme();
-  const isDark = theme === "dark";
-  const cardBg = isDark ? "#26262E" : "#FFFFFF";
-  const innerBg = isDark ? "#2E2E38" : "#F5F5F5";
-  const outerBg = isDark ? "#222228" : "#F3F3F3";
-
-  const contentVariants: Variants = {
-    hidden: { opacity: 0, y: 16 },
-    show: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.25,
-        ease: "easeOut",
-        when: "beforeChildren",
-        staggerChildren: 0.08,
-      },
-    },
-    exit: {
-      opacity: 0,
-      y: -16,
-      transition: {
-        duration: 0.18,
-        ease: "easeIn",
-      },
-    },
-  };
-
-  const sectionVariants: Variants = {
-    hidden: { opacity: 0, y: 10 },
-    show: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.22, ease: "easeOut" },
-    },
-    exit: {
-      opacity: 0,
-      y: -10,
-      transition: { duration: 0.14, ease: "easeIn" },
-    },
-  };
-
-  const pointsContainerVariants: Variants = {
-    hidden: {},
-    show: {
-      transition: {
-        staggerChildren: 0.05,
-        delayChildren: 0.04,
-      },
-    },
-    exit: {
-      transition: {
-        staggerChildren: 0.02,
-        staggerDirection: -1,
-      },
-    },
-  };
-
-  const pointVariants: Variants = {
-    hidden: { opacity: 0, y: 8 },
-    show: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.18, ease: "easeOut" },
-    },
-    exit: {
-      opacity: 0,
-      y: -8,
-      transition: { duration: 0.12, ease: "easeIn" },
-    },
-  };
-  const monthlyPoints = [
-    "Generate high-quality ASCII art",
-    "Export PNG, TXT, and copyable code snippets",
-    "Access core style presets",
-    "Fast rendering for short-form content",
-    "Watermarked exports",
-    "Standard support",
-    "Great for trying Monowave",
-  ];
-  const yearlyPoints = [
-    "Everything in Monthly",
-    "Unlimited exports (PNG / TXT / code)",
-    "No watermark on outputs",
-    "Access premium style packs",
-    "Priority rendering + queue",
-    "Priority support",
-    "Save 20% with annual billing",
-  ];
+  const active = tiers[activeTab];
 
   return (
-    <div
-      id="pricing"
-      className="flex flex-col justify-center items-center scroll-mt-32"
-    >
-      <div
-        className="flex  p-1.5 justify-center items-center relative"
-        style={{
-          background: "#B54B00",
-          boxShadow:
-            "0px 0px 4px rgba(0, 0, 0, 0.04), 0px 8px 16px rgba(0, 0, 0, 0.08), inset 2px 3px 3.5px rgba(255, 255, 255, 0.18)",
-          borderRadius: "99px",
-        }}
-      >
-        <button
-          className="relative px-4 py-3 flex justify-center items-center font-medium"
-          style={{ borderRadius: "99px", zIndex: 1 }}
-          onClick={() => setActiveTab("monthly")}
-        >
-          {activeTab === "monthly" && (
-            <motion.div
-              layoutId="pricing-tab-pill"
-              className="absolute inset-0"
-              style={{
-                background: "#F5F5F5",
-                boxShadow:
-                  "0px 4px 1px rgba(0, 0, 0, 0.01), 0px 2px 1px rgba(0, 0, 0, 0.05), 0px 1px 1px rgba(0, 0, 0, 0.09), 0px 0px 1px rgba(0, 0, 0, 0.1), inset 0px 2px 2.2px rgba(255,255,255,0.1)",
-                borderRadius: "99px",
-                zIndex: 0,
-              }}
-              transition={{ duration: 0.38, ease: [0.22, 1, 0.36, 1] }}
-              initial={false}
+    <section id="pricing" className="flex justify-center px-4 scroll-mt-28">
+      <div className="landing-content-width">
+        <div className="mb-8 flex flex-col gap-4 text-center">
+          <p className="font-mono text-xs uppercase tracking-[0.28em] text-cyan-200">
+            Access model
+          </p>
+          <h2 className="text-4xl font-semibold tracking-[-0.03em] text-white md:text-5xl">
+            Free studio first. Pro power when exports matter.
+          </h2>
+          <p className="mx-auto max-w-2xl text-sm leading-7 text-slate-400">
+            Keep the browser workflow open, then monetize higher output quality,
+            saved presets, no-watermark exports, and premium rendering tools.
+          </p>
+        </div>
+
+        <div className="mx-auto mb-8 flex w-fit rounded-2xl border border-white/10 bg-white/[0.06] p-1 backdrop-blur-xl">
+          {(["monthly", "yearly"] as const).map((tab) => (
+            <button
+              key={tab}
+              type="button"
+              onClick={() => setActiveTab(tab)}
+              className={`relative rounded-xl px-5 py-2.5 text-sm font-medium transition-colors ${
+                activeTab === tab
+                  ? "text-white"
+                  : "text-slate-500 hover:text-slate-200"
+              }`}
+            >
+              {activeTab === tab && (
+                <motion.span
+                  layoutId="pricing-glass-tab"
+                  className="absolute inset-0 rounded-xl border border-cyan-300/25 bg-cyan-300/12 shadow-[0_0_28px_rgba(34,211,238,0.16)]"
+                />
+              )}
+              <span className="relative z-10">{tiers[tab].label}</span>
+            </button>
+          ))}
+        </div>
+
+        <div className="glass-panel grid overflow-hidden rounded-[2rem] lg:grid-cols-[0.95fr_1.05fr]">
+          <div className="relative min-h-[360px] overflow-hidden border-b border-white/10 p-8 lg:border-b-0 lg:border-r">
+            <video
+              className="absolute inset-0 h-full w-full object-cover opacity-25 mix-blend-screen"
+              src="/pricing-bg.mp4"
+              autoPlay
+              loop
+              muted
+              playsInline
             />
-          )}
-          <span
-            className="relative z-10"
-            style={{
-              color: activeTab === "monthly" ? "#222" : "#fff",
-            }}
-          >
-            Monthly
-          </span>
-        </button>
-        <button
-          className="relative px-4 py-3 flex justify-center items-center font-medium"
-          style={{ borderRadius: "99px", zIndex: 1 }}
-          onClick={() => setActiveTab("yearly")}
-        >
-          {activeTab === "yearly" && (
-            <motion.div
-              layoutId="pricing-tab-pill"
-              className="absolute inset-0"
-              style={{
-                background: "#F5F5F5",
-                boxShadow:
-                  "0px 4px 1px rgba(0, 0, 0, 0.01), 0px 2px 1px rgba(0, 0, 0, 0.05), 0px 1px 1px rgba(0, 0, 0, 0.09), 0px 0px 1px rgba(0, 0, 0, 0.1), inset 0px 2px 2.2px rgba(255,255,255,0.1)",
-                borderRadius: "99px",
-                zIndex: 0,
-              }}
-              transition={{ duration: 0.38, ease: [0.22, 1, 0.36, 1] }}
-              initial={false}
-            />
-          )}
-          <span
-            className="relative z-10"
-            style={{
-              color: activeTab === "yearly" ? "#222" : "#fff",
-            }}
-          >
-            Yearly (Save 20%)
-          </span>
-        </button>
-      </div>
-      <div
-        className="landing-content-width border mt-10 relative overflow-hidden"
-        onMouseEnter={() => setIsPricingPanelHovered(true)}
-        onMouseLeave={() => setIsPricingPanelHovered(false)}
-        style={{
-          background: outerBg,
-          boxShadow:
-            "0px 1px 0px rgba(255, 255, 255, 0.25), inset 0px 1px 2px 1px rgba(0, 0, 0, 0.15)",
-          borderRadius: "32px",
-        }}
-      >
-        <video
-          className="pointer-events-none absolute object-cover transition-opacity duration-300"
-          src="/pricing-bg.mp4"
-          autoPlay
-          loop
-          muted
-          playsInline
-          style={{
-            opacity: isPricingPanelHovered ? 1 : 0,
-            height: "100%",
-            width: "105%",
-            objectFit: "cover",
-          }}
-        />
-        <div
-          className="relative z-10 grid gap-4 p-4 grid-cols-1 items-stretch md:[grid-template-columns:1fr_var(--pricing-side-col)]"
-          style={
-            {
-              "--pricing-side-col": `${sideColumnWidthPx}px`,
-            } as React.CSSProperties
-          }
-        >
-          <motion.div
-            layout="position"
-            className="px-8 py-7"
-            style={{
-              background: cardBg,
-              boxShadow:
-                "0px 15px 6px rgba(0, 0, 0, 0.01), 0px 4px 4px rgba(0, 0, 0, 0.09), 0px 1px 2px rgba(0, 0, 0, 0.1)",
-              borderRadius: "16px",
-            }}
-          >
-            <AnimatePresence mode="wait" initial={false}>
-              <motion.div
-                key={activeTab}
-                className="overflow-hidden"
-                initial={{ height: 0, opacity: 0 }}
-                animate={{ height: "auto", opacity: 1 }}
-                exit={{ height: 0, opacity: 0 }}
-                transition={{
-                  height: { duration: 0.38, ease: [0.22, 1, 0.36, 1] },
-                  opacity: { duration: 0.2, ease: "easeOut" },
-                }}
-              >
-                <motion.div
-                  variants={contentVariants}
-                  initial="hidden"
-                  animate="show"
-                  exit="exit"
-                >
-                  <motion.div
-                    className="flex gap-2 items-center"
-                    variants={sectionVariants}
-                  >
-                    <span className=" font-medium text-2xl">
-                      {activeTab === "monthly" ? "Pay Monthly" : "Pay Yearly"}
-                    </span>{" "}
-                  </motion.div>
-                  <motion.div
-                    style={{ lineHeight: "120%" }}
-                    className="text-lg mt-3"
-                    variants={sectionVariants}
-                  >
-                    {activeTab === "monthly"
-                      ? "Perfect for creators getting started with Monowave. Build and export polished ASCII content with essential tools and flexible output options."
-                      : "Built for teams and power creators who need unlimited output, premium styles, faster turnaround, and the best long-term value."}
-                  </motion.div>
-                  <motion.div
-                    className="mt-6 flex flex-col gap-4"
-                    variants={pointsContainerVariants}
-                  >
-                    {(activeTab === "monthly"
-                      ? monthlyPoints
-                      : yearlyPoints
-                    ).map((point) => (
-                      <motion.div
-                        key={point}
-                        className="flex gap-1.5"
-                        variants={pointVariants}
-                      >
-                        <Check className="text-muted-foreground shrink-0 size-5 mt-0.5" />
-                        <span className="text">{point}</span>
-                      </motion.div>
-                    ))}
-                  </motion.div>
-                </motion.div>
-              </motion.div>
-            </AnimatePresence>
-          </motion.div>
-          <div
-            className="h-full"
-            style={{
-              background: cardBg,
-              boxShadow:
-                "0px 15px 6px rgba(0, 0, 0, 0.01), 0px 4px 4px rgba(0, 0, 0, 0.09), 0px 1px 2px rgba(0, 0, 0, 0.1)",
-              borderRadius: "16px",
-            }}
-          >
-            <div className="p-3 flex gap-3 flex-col h-full">
-              <div
-                className="h-full flex-1 border rounded-xl"
-                style={{
-                  background: innerBg,
-                  boxShadow:
-                    "0px 1px 0px rgba(255, 255, 255, 0.25), inset 0px 1px 2px rgba(0, 0, 0, 0.15)",
-                }}
-              >
-                <AnimatePresence mode="wait" initial={false}>
-                  <motion.div
-                    key={activeTab}
-                    className="h-full max-sm:min-h-[20vh]"
-                    initial={{ opacity: 0 }}
-                    animate={{
-                      opacity: 1,
-                      transition: {
-                        delay: 0.38,
-                        duration: 0.18,
-                        ease: [0.22, 1, 0.36, 1],
-                      },
-                    }}
-                    exit={{
-                      opacity: 0,
-                      transition: { duration: 0.05, ease: "linear" },
-                    }}
-                  >
-                    <AsciiVisual tier={activeTab} />
-                  </motion.div>
-                </AnimatePresence>
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(34,211,238,0.22),transparent_18rem),linear-gradient(180deg,rgba(2,6,23,0.25),rgba(2,6,23,0.92))]" />
+            <div className="relative z-10 flex h-full flex-col justify-between">
+              <div>
+                <div className="inline-flex items-center gap-2 rounded-full border border-cyan-300/25 bg-cyan-300/10 px-3 py-1 text-xs text-cyan-100">
+                  <Sparkles className="size-3.5" />
+                  Planned monetization layer
+                </div>
+                <h3 className="mt-6 max-w-sm text-4xl font-semibold tracking-[-0.03em] text-white">
+                  Premium exports without blocking the first creation.
+                </h3>
               </div>
-              <DmOnXButton className="w-full rounded-xl" />
+              <DmOnXButton />
+            </div>
+          </div>
+
+          <div className="p-6 sm:p-8">
+            <div className="rounded-3xl border border-white/10 bg-slate-950/55 p-6">
+              <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+                <div>
+                  <p className="text-sm uppercase tracking-[0.2em] text-cyan-200">
+                    {active.label}
+                  </p>
+                  <div className="mt-3 flex items-end gap-2">
+                    <span className="text-5xl font-semibold text-white">
+                      {active.price}
+                    </span>
+                    <span className="pb-2 text-sm text-slate-500">
+                      {activeTab === "monthly" ? "/mo" : "/yr"}
+                    </span>
+                  </div>
+                </div>
+                <Button
+                  variant="landingBlue"
+                  size="landing"
+                  className="h-11 px-5"
+                >
+                  Join waitlist
+                </Button>
+              </div>
+              <p className="mt-5 text-sm leading-7 text-slate-400">
+                {active.note}
+              </p>
+              <div className="mt-7 space-y-3">
+                {active.points.map((point) => (
+                  <div
+                    key={point}
+                    className="flex items-center gap-3 text-sm text-slate-300"
+                  >
+                    <span className="grid size-6 place-items-center rounded-full bg-cyan-300/10 text-cyan-200">
+                      <Check className="size-3.5" />
+                    </span>
+                    {point}
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 

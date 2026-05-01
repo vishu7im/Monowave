@@ -11,17 +11,15 @@ export function DesktopOnlyGate({ children }: { children: React.ReactNode }) {
 
   if (!isDesktop) {
     return (
-      <div className="flex min-h-dvh flex-col items-center justify-center gap-8 bg-zinc-950 px-6 text-center font-satoshi">
+      <div className="aurora-grid flex min-h-dvh flex-col items-center justify-center gap-8 bg-slate-950 px-6 text-center font-satoshi">
         <div
-          className="flex size-16 items-center justify-center rounded-2xl"
+          className="glass-panel flex size-16 items-center justify-center rounded-2xl"
           style={{
-            background:
-              "radial-gradient(152.32% 683.53% at 108.86% 152.32%, #FFD9B8 0%, #FFF5ED 100%)",
             boxShadow:
-              "0px 4px 24px rgba(181, 75, 0, 0.25), inset 0px 2px 2.2px #FFFFFF",
+              "0px 4px 34px rgba(34, 211, 238, 0.24), inset 0px 1px 0 rgba(255,255,255,0.14)",
           }}
         >
-          <Monitor className="size-8 text-[#B54B00]" />
+          <Monitor className="size-8 text-cyan-200" />
         </div>
 
         <div className="flex flex-col gap-3">

@@ -50,7 +50,7 @@ function StudioShell() {
   return (
     <div
       suppressHydrationWarning
-      className="flex h-dvh flex-col overflow-hidden bg-[#F9FAFC] dark:bg-zinc-950 font-satoshi text-[#111] dark:text-zinc-100"
+      className="aurora-grid flex h-dvh flex-col overflow-hidden bg-slate-950 font-satoshi text-slate-100"
     >
       <TopBar
         sidebarOpen={sidebarOpen}
@@ -58,12 +58,12 @@ function StudioShell() {
       />
 
       {/* Main Studio Area with slight padding for floating panels */}
-      <div className="relative flex flex-1 min-h-0 overflow-hidden p-2 sm:p-4 gap-4">
+      <div className="relative flex flex-1 min-h-0 gap-4 overflow-hidden p-2 sm:p-4">
         {/* Sidebar */}
         <aside
           suppressHydrationWarning
           className={cn(
-            "w-[320px] shrink-0 overflow-y-auto [&::-webkit-scrollbar]:hidden [scrollbar-width:none] rounded-3xl border border-[#E5E5E5] dark:border-zinc-800 bg-white dark:bg-zinc-900 shadow-xl shadow-black/6 dark:shadow-black/40",
+            "glass-panel w-[320px] shrink-0 overflow-y-auto [&::-webkit-scrollbar]:hidden [scrollbar-width:none] rounded-[1.75rem] shadow-2xl shadow-cyan-950/20",
             "fixed inset-y-4 left-4 z-40 transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)]",
             sidebarOpen ? "translate-x-0" : "-translate-x-[120%]",
             "md:relative md:inset-auto md:z-auto md:translate-x-0",
@@ -88,7 +88,7 @@ function StudioShell() {
         <main
           suppressHydrationWarning
           ref={previewRef}
-          className="flex flex-1 min-w-0 min-h-0 flex-col overflow-hidden rounded-3xl border border-[#E5E5E5] dark:border-zinc-800 bg-white dark:bg-zinc-900 shadow-[0px_1px_2px_rgba(0,0,0,0.04)]"
+          className="glass-panel flex flex-1 min-w-0 min-h-0 flex-col overflow-hidden rounded-[1.75rem]"
         >
           <PreviewStage />
         </main>
@@ -108,7 +108,7 @@ function useDefaultSample() {
     const isDark = stored
       ? stored === "dark"
       : window.matchMedia("(prefers-color-scheme: dark)").matches;
-    patchAppearance({ backgroundColor: isDark ? "#0B0B0D" : "#ffffff" });
+    patchAppearance({ backgroundColor: isDark ? "#050814" : "#08111F" });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

@@ -94,19 +94,19 @@ function AccordionSection({
   const [isOpen, setIsOpen] = useState(defaultOpen);
 
   return (
-    <section className="border-b border-[#E5E5E5]/70 dark:border-zinc-800/70 last:border-0">
+    <section className="border-b border-white/10 last:border-0">
       <header
-        className="flex cursor-pointer items-center justify-between gap-2 px-4 py-3 select-none transition-colors hover:bg-[#F9FAFC] dark:hover:bg-zinc-800/50"
+        className="flex cursor-pointer select-none items-center justify-between gap-2 px-4 py-3 transition-colors hover:bg-white/[0.06]"
         onClick={() => setIsOpen(!isOpen)}
       >
         <div className="flex items-center gap-2">
           <ChevronDown
             className={cn(
-              "size-3.5 text-[#B54B00]/40 transition-transform duration-200",
+              "size-3.5 text-cyan-300/60 transition-transform duration-200",
               isOpen ? "rotate-0" : "-rotate-90",
             )}
           />
-          <h3 className="font-sans text-xs font-semibold tracking-wide text-[#111] dark:text-zinc-100">
+          <h3 className="font-sans text-xs font-semibold tracking-wide text-slate-100">
             {title}
           </h3>
         </div>
@@ -136,7 +136,7 @@ function ResetChip({ onClick }: { onClick: () => void }) {
       onClick={onClick}
       variant="landing"
       size="sm"
-      className="h-7 min-h-0 rounded-full px-3 py-0 font-mono text-[9px] font-semibold uppercase tracking-widest text-[#B54B00]"
+      className="h-7 min-h-0 rounded-full px-3 py-0 font-mono text-[9px] font-semibold uppercase tracking-widest text-cyan-100"
     >
       Reset
     </Button>
@@ -162,7 +162,7 @@ function MiniDivider({ label }: { label: string }) {
       >
         {label}
       </span>
-      <div className="h-px flex-1 bg-[#E5E5E5]/80" />
+      <div className="h-px flex-1 bg-white/10" />
     </div>
   );
 }
@@ -209,7 +209,7 @@ function SliderField({
     <div className="space-y-2 py-1">
       <div className="flex items-center justify-between">
         <FieldLabel>{label}</FieldLabel>
-        <span className="min-w-[3ch] text-right font-mono text-[10px] tabular-nums text-[#111] dark:text-zinc-100">
+        <span className="min-w-[3ch] text-right font-mono text-[10px] tabular-nums text-slate-100">
           {display ?? value}
         </span>
       </div>
@@ -290,16 +290,16 @@ function SourceSection() {
         className={cn(
           "flex min-h-24 w-full cursor-pointer flex-col items-center justify-center gap-3 px-3 py-5 text-center",
           STUDIO_DROPZONE,
-          isDragActive && "border-[#B54B00] bg-[#FFF5ED]/90",
+          isDragActive && "border-cyan-200/70 bg-cyan-300/10",
         )}
       >
         <input {...getInputProps()} />
-        <Upload className="h-3.5 w-3.5 shrink-0 text-[#B54B00]/80" />
+        <Upload className="h-3.5 w-3.5 shrink-0 text-cyan-200" />
         <div className="space-y-1">
-          <p className="font-sans text-xs font-semibold text-[#111] dark:text-zinc-100">
+          <p className="font-sans text-xs font-semibold text-slate-100">
             {isDragActive ? "Drop to load" : "Drop or browse"}
           </p>
-          <p className="font-sans text-[10px] text-[#666] dark:text-zinc-500">
+          <p className="font-sans text-[10px] text-slate-500">
             Image, GIF, or video · up to 30 MB
           </p>
         </div>
@@ -308,12 +308,12 @@ function SourceSection() {
       {source && (
         <div
           className={cn(
-            "flex items-center gap-3 rounded-lg bg-white dark:bg-zinc-800 p-2 pl-3",
+            "flex items-center gap-3 rounded-xl bg-white/[0.045] p-2 pl-3",
             STUDIO_CARD_OUTLINE,
             "shadow-[0px_1px_2px_rgba(0,0,0,0.04)]",
           )}
         >
-          <div className="flex size-7 shrink-0 items-center justify-center rounded-md border border-[#E5E5E5] dark:border-zinc-700 bg-[#F9FAFC] dark:bg-zinc-700 text-[#B54B00]">
+          <div className="flex size-7 shrink-0 items-center justify-center rounded-lg border border-white/10 bg-cyan-300/10 text-cyan-100">
             {source.kind === "image" ? (
               <ImageIcon className="size-3.5" />
             ) : (
@@ -321,10 +321,10 @@ function SourceSection() {
             )}
           </div>
           <div className="min-w-0 flex-1">
-            <p className="truncate font-sans text-xs font-semibold text-[#111] dark:text-zinc-100">
+            <p className="truncate font-sans text-xs font-semibold text-slate-100">
               {source.file?.name ?? "Sample source"}
             </p>
-            <p className="font-mono text-[10px] tabular-nums text-[#666] dark:text-zinc-500">
+            <p className="font-mono text-[10px] tabular-nums text-slate-500">
               {source.width} × {source.height}
             </p>
           </div>
@@ -334,7 +334,7 @@ function SourceSection() {
               if (source.url) URL.revokeObjectURL(source.url);
               clearSource();
             }}
-            className="flex size-7 shrink-0 items-center justify-center rounded-sm text-[#888] transition-colors hover:bg-red-500/10 hover:text-red-400"
+            className="flex size-7 shrink-0 items-center justify-center rounded-lg text-slate-500 transition-colors hover:bg-red-500/10 hover:text-red-300"
             aria-label="Remove source"
           >
             <Trash2 className="size-3.5" />
@@ -410,7 +410,7 @@ function BackgroundCanvasSection({
           <FieldLabel>Width (Cols)</FieldLabel>
           <div
             className={cn(
-              "flex items-center overflow-hidden rounded-md border border-[#E5E5E5] dark:border-zinc-700 bg-white dark:bg-zinc-800",
+              "flex items-center overflow-hidden rounded-lg border border-white/10 bg-white/[0.045]",
               responsiveFit && "opacity-50 pointer-events-none",
             )}
           >
@@ -418,7 +418,7 @@ function BackgroundCanvasSection({
               type="button"
               onClick={() => setColumns(Math.max(40, columns - 1))}
               disabled={responsiveFit || columns <= 40}
-              className="flex h-8 w-7 shrink-0 items-center justify-center border-r border-[#E5E5E5] dark:border-zinc-700 text-[#888] dark:text-zinc-400 hover:bg-[#F9FAFC] dark:hover:bg-zinc-700 hover:text-[#111] dark:hover:text-zinc-100 transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+              className="flex h-8 w-7 shrink-0 items-center justify-center border-r border-white/10 text-slate-500 transition-colors hover:bg-cyan-300/10 hover:text-cyan-100 disabled:cursor-not-allowed disabled:opacity-40"
             >
               <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
                 <path
@@ -431,7 +431,7 @@ function BackgroundCanvasSection({
             </button>
             <input
               type="number"
-              className="h-8 w-full min-w-0 bg-transparent text-center font-mono text-xs tabular-nums text-[#111] dark:text-zinc-100 outline-none [appearance:textfield] [&::-webkit-inner-spin-button]:hidden [&::-webkit-outer-spin-button]:hidden"
+              className="h-8 w-full min-w-0 bg-transparent text-center font-mono text-xs tabular-nums text-slate-100 outline-none [appearance:textfield] [&::-webkit-inner-spin-button]:hidden [&::-webkit-outer-spin-button]:hidden"
               value={columns}
               min={40}
               max={300}
@@ -442,7 +442,7 @@ function BackgroundCanvasSection({
               type="button"
               onClick={() => setColumns(Math.min(300, columns + 1))}
               disabled={responsiveFit || columns >= 300}
-              className="flex h-8 w-7 shrink-0 items-center justify-center border-l border-[#E5E5E5] dark:border-zinc-700 text-[#888] dark:text-zinc-400 hover:bg-[#F9FAFC] dark:hover:bg-zinc-700 hover:text-[#111] dark:hover:text-zinc-100 transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+              className="flex h-8 w-7 shrink-0 items-center justify-center border-l border-white/10 text-slate-500 transition-colors hover:bg-cyan-300/10 hover:text-cyan-100 disabled:cursor-not-allowed disabled:opacity-40"
             >
               <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
                 <path
@@ -544,7 +544,7 @@ function ConversionSection() {
                 className={STUDIO_SELECT_ITEM}
               >
                 <span className="font-semibold">{p.label}</span>
-                <span className="ml-2 font-mono text-[10px] text-[#666] dark:text-zinc-500">
+                <span className="ml-2 font-mono text-[10px] text-slate-500">
                   {p.chars.replace(/^\s+/, "").slice(0, 14)}
                 </span>
               </SelectItem>
@@ -642,7 +642,7 @@ function AppearanceSection() {
               STUDIO_OUTLINE_TERTIARY,
               "h-7 w-8 min-w-8 rounded-full border-[#D8D8D8] p-0",
               isBold &&
-                "border-[#EBC6A5] bg-[#FFF5ED] text-[#7A3300] shadow-[inset_0_1px_1px_rgba(0,0,0,0.05)]",
+                "border-cyan-300/40 bg-cyan-300/10 text-cyan-100 shadow-[inset_0_1px_1px_rgba(255,255,255,0.08)]",
             )}
           >
             <Bold className="size-3.5" />
@@ -662,7 +662,7 @@ function AppearanceSection() {
               STUDIO_OUTLINE_TERTIARY,
               "h-7 w-8 min-w-8 rounded-full border-[#D8D8D8] p-0",
               appearance.fontStyle === "italic" &&
-                "border-[#EBC6A5] bg-[#FFF5ED] text-[#7A3300] shadow-[inset_0_1px_1px_rgba(0,0,0,0.05)]",
+                "border-cyan-300/40 bg-cyan-300/10 text-cyan-100 shadow-[inset_0_1px_1px_rgba(255,255,255,0.08)]",
             )}
           >
             <Italic className="size-3.5" />
@@ -776,13 +776,13 @@ export function ExportSection() {
       id: PROGRESS_TOAST_ID,
       description: (
         <div className="flex flex-col gap-1.5 pt-0.5">
-          <div className="flex items-center justify-between text-xs text-zinc-400">
+          <div className="flex items-center justify-between text-xs text-slate-400">
             <span>{exportStage || "Preparing export"}</span>
             <span className="tabular-nums">{clampedProgress}%</span>
           </div>
           <div className="h-1 w-full overflow-hidden rounded-full bg-zinc-800">
             <div
-              className="h-full rounded-full bg-[#B54B00] transition-all duration-300"
+              className="h-full rounded-full bg-cyan-300 transition-all duration-300"
               style={{ width: `${clampedProgress}%` }}
             />
           </div>

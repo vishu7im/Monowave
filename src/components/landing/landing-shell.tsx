@@ -15,52 +15,54 @@ export function LandingShell() {
 
   return (
     <div
-      className={isDark ? "dark" : ""}
+      className={isDark ? "dark aurora-grid" : "aurora-grid"}
       style={
         isDark
           ? {
-              background: "#09090B",
-              color: "#E8E8F0",
-              ["--background" as string]: "#1E1E24",
+              background: "#050814",
+              color: "#E8F7FF",
+              ["--background" as string]: "#050814",
               ["--foreground" as string]: "oklch(0.92 0.004 264)",
-              ["--card" as string]: "#26262E",
+              ["--card" as string]: "rgba(15,23,42,0.72)",
               ["--card-foreground" as string]: "oklch(0.92 0.004 264)",
-              ["--muted" as string]: "oklch(0.28 0.006 264)",
-              ["--muted-foreground" as string]: "oklch(0.62 0.008 264)",
-              ["--border" as string]: "oklch(0.32 0.006 264)",
-              ["--primary" as string]: "oklch(0.92 0.004 264)",
-              ["--primary-foreground" as string]: "oklch(0.18 0.006 264)",
-              ["--secondary" as string]: "oklch(0.28 0.006 264)",
+              ["--muted" as string]: "rgba(148,163,184,0.12)",
+              ["--muted-foreground" as string]: "#94A3B8",
+              ["--border" as string]: "rgba(255,255,255,0.12)",
+              ["--primary" as string]: "#67E8F9",
+              ["--primary-foreground" as string]: "#020617",
+              ["--secondary" as string]: "rgba(255,255,255,0.08)",
               ["--secondary-foreground" as string]: "oklch(0.92 0.004 264)",
-              ["--accent" as string]: "oklch(0.28 0.006 264)",
+              ["--accent" as string]: "rgba(34,211,238,0.12)",
               ["--accent-foreground" as string]: "oklch(0.92 0.004 264)",
-              ["--popover" as string]: "#26262E",
+              ["--popover" as string]: "rgba(15,23,42,0.96)",
               ["--popover-foreground" as string]: "oklch(0.92 0.004 264)",
             }
           : {
-              background: "#F9FAFC",
-              color: "#111111",
-              ["--background" as string]: "#F9FAFC",
-              ["--foreground" as string]: "oklch(0.13 0 0)",
-              ["--card" as string]: "#ffffff",
-              ["--card-foreground" as string]: "oklch(0.13 0 0)",
-              ["--muted" as string]: "oklch(0.96 0 0)",
-              ["--muted-foreground" as string]: "oklch(0.42 0 0)",
-              ["--border" as string]: "oklch(0.90 0 0)",
-              ["--primary" as string]: "oklch(0.13 0 0)",
-              ["--primary-foreground" as string]: "oklch(0.98 0 0)",
-              ["--secondary" as string]: "oklch(0.96 0 0)",
-              ["--secondary-foreground" as string]: "oklch(0.13 0 0)",
-              ["--accent" as string]: "oklch(0.96 0 0)",
-              ["--accent-foreground" as string]: "oklch(0.13 0 0)",
-              ["--popover" as string]: "#ffffff",
-              ["--popover-foreground" as string]: "oklch(0.13 0 0)",
+              background: "#08111F",
+              color: "#E8F7FF",
+              ["--background" as string]: "#08111F",
+              ["--foreground" as string]: "#E8F7FF",
+              ["--card" as string]: "rgba(15,23,42,0.72)",
+              ["--card-foreground" as string]: "#E8F7FF",
+              ["--muted" as string]: "rgba(148,163,184,0.12)",
+              ["--muted-foreground" as string]: "#94A3B8",
+              ["--border" as string]: "rgba(255,255,255,0.12)",
+              ["--primary" as string]: "#67E8F9",
+              ["--primary-foreground" as string]: "#020617",
+              ["--secondary" as string]: "rgba(255,255,255,0.08)",
+              ["--secondary-foreground" as string]: "#E8F7FF",
+              ["--accent" as string]: "rgba(34,211,238,0.12)",
+              ["--accent-foreground" as string]: "#E8F7FF",
+              ["--popover" as string]: "rgba(15,23,42,0.96)",
+              ["--popover-foreground" as string]: "#E8F7FF",
             }
       }
     >
-      <div className="flex flex-col justify-center items-center min-h-screen w-full relative font-satoshi">
+      <div className="relative flex min-h-screen w-full flex-col items-center overflow-hidden font-satoshi">
+        <div className="pointer-events-none fixed inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(34,211,238,0.12),transparent_32rem)]" />
+        <div className="pointer-events-none fixed inset-0 bg-[linear-gradient(180deg,transparent_0%,rgba(2,6,23,0.72)_52%,#020617_100%)]" />
         <Navbar />
-        <div className="landing-sections-stack">
+        <div className="landing-sections-stack relative z-10">
           <div className="w-full relative">
             <HeroSection />
           </div>

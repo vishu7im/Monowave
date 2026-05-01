@@ -3,9 +3,9 @@
 import { useLayoutEffect, useRef } from "react";
 import { cn } from "@/lib/utils";
 
-/** Primary brand orange (top) → light warm tint (bottom) */
-const GRADIENT_TOP = "#C96020";
-const GRADIENT_BOTTOM = "#FFF8F2";
+/** Primary cyan brand (top) to deep spectral tint (bottom). */
+const GRADIENT_TOP = "#22d3ee";
+const GRADIENT_BOTTOM = "#0f172a";
 
 const CELL = 4;
 const DOT = 1;

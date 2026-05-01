@@ -21,8 +21,8 @@ export function ColorField({ label, value, onChange, asRow }: ColorFieldProps) {
       type="button"
       className={
         asRow
-          ? "flex items-center gap-2.5 w-full rounded-lg border border-[#E5E5E5] dark:border-zinc-700 bg-white dark:bg-zinc-800 px-2.5 py-2 transition-colors hover:border-[#B54B00]/50"
-          : "flex w-full items-center gap-2 rounded-md border border-[#E5E5E5] dark:border-zinc-700 bg-white dark:bg-zinc-800 px-2 py-1.5 transition-colors hover:border-[#B54B00]/40"
+          ? "flex items-center gap-2.5 w-full rounded-lg border border-white/10 bg-white/[0.045] px-2.5 py-2 transition-colors hover:border-cyan-300/50"
+          : "flex w-full items-center gap-2 rounded-md border border-white/10 bg-white/[0.045] px-2 py-1.5 transition-colors hover:border-cyan-300/40"
       }
       aria-label={`Pick ${label}`}
     >
@@ -32,20 +32,20 @@ export function ColorField({ label, value, onChange, asRow }: ColorFieldProps) {
             className="size-5 shrink-0 rounded-md border border-black/10"
             style={{ background: value }}
           />
-          <span className="flex-1 text-left font-sans text-xs text-[#111] dark:text-zinc-100">
+          <span className="flex-1 text-left font-sans text-xs text-slate-100">
             {label}
           </span>
-          <span className="font-mono text-[9px] uppercase tabular-nums text-[#888] dark:text-zinc-500 tracking-wide">
+          <span className="font-mono text-[9px] uppercase tabular-nums text-slate-500 tracking-wide">
             {value}
           </span>
         </>
       ) : (
         <>
           <span
-            className="size-4 shrink-0 rounded border border-[#E5E5E5] dark:border-zinc-600"
+            className="size-4 shrink-0 rounded border border-white/10"
             style={{ background: value }}
           />
-          <span className="font-mono text-[9px] uppercase tabular-nums tracking-wide text-[#111] dark:text-zinc-100 truncate">
+          <span className="truncate font-mono text-[9px] uppercase tabular-nums tracking-wide text-slate-100">
             {value}
           </span>
         </>
@@ -73,7 +73,7 @@ export function ColorField({ label, value, onChange, asRow }: ColorFieldProps) {
 
   return (
     <div className="flex flex-col gap-1.5">
-      <span className="font-mono text-[9px] uppercase tracking-[0.18em] text-[#888] dark:text-zinc-500">
+      <span className="font-mono text-[9px] uppercase tracking-[0.18em] text-slate-500">
         {label}
       </span>
       <Popover>

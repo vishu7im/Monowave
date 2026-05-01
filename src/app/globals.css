@@ -50,40 +50,40 @@
   --radius-4xl: var(--radius);
 }
 
-/* ── Aceternity Dark Aesthetic ──────────────────────────────────────────────── */
+/* ── Monowave Futurist Glass System ────────────────────────────────────────── */
 :root, .dark {
-  --background:           oklch(0.13 0 0);
-  --foreground:           oklch(0.98 0 0);
-  --card:                 oklch(0.16 0 0);
-  --card-foreground:      oklch(0.98 0 0);
-  --popover:              oklch(0.16 0 0);
-  --popover-foreground:   oklch(0.98 0 0);
-  --primary:              oklch(0.98 0 0);
-  --primary-foreground:   oklch(0.13 0 0);
-  --secondary:            oklch(0.20 0 0);
-  --secondary-foreground: oklch(0.98 0 0);
-  --muted:                oklch(0.20 0 0);
-  --muted-foreground:     oklch(0.70 0 0);
-  --accent:               oklch(0.20 0 0);
-  --accent-foreground:    oklch(0.98 0 0);
-  --destructive:          oklch(0.40 0.15 25);
-  --border:               oklch(0.25 0 0);
-  --input:                oklch(0.25 0 0);
-  --ring:                 oklch(0.40 0 0);
-  --chart-1:              oklch(0.60 0 0);
-  --chart-2:              oklch(0.50 0 0);
-  --chart-3:              oklch(0.40 0 0);
-  --chart-4:              oklch(0.30 0 0);
-  --chart-5:              oklch(0.20 0 0);
+  --background:           oklch(0.105 0.025 255);
+  --foreground:           oklch(0.96 0.012 245);
+  --card:                 oklch(0.18 0.035 255 / 0.72);
+  --card-foreground:      oklch(0.96 0.012 245);
+  --popover:              oklch(0.15 0.04 255 / 0.96);
+  --popover-foreground:   oklch(0.96 0.012 245);
+  --primary:              oklch(0.80 0.14 220);
+  --primary-foreground:   oklch(0.10 0.025 255);
+  --secondary:            oklch(0.22 0.045 260 / 0.74);
+  --secondary-foreground: oklch(0.94 0.018 245);
+  --muted:                oklch(0.21 0.035 255 / 0.68);
+  --muted-foreground:     oklch(0.70 0.035 245);
+  --accent:               oklch(0.28 0.10 280 / 0.72);
+  --accent-foreground:    oklch(0.94 0.02 245);
+  --destructive:          oklch(0.58 0.18 25);
+  --border:               oklch(0.92 0.025 245 / 0.12);
+  --input:                oklch(0.92 0.025 245 / 0.12);
+  --ring:                 oklch(0.80 0.14 220);
+  --chart-1:              oklch(0.78 0.15 220);
+  --chart-2:              oklch(0.72 0.16 285);
+  --chart-3:              oklch(0.78 0.12 165);
+  --chart-4:              oklch(0.68 0.14 250);
+  --chart-5:              oklch(0.74 0.13 305);
   --radius:               1rem;
-  --sidebar:              oklch(0.16 0 0);
-  --sidebar-foreground:   oklch(0.98 0 0);
-  --sidebar-primary:      oklch(0.98 0 0);
-  --sidebar-primary-foreground: oklch(0.13 0 0);
-  --sidebar-accent:       oklch(0.20 0 0);
-  --sidebar-accent-foreground: oklch(0.98 0 0);
-  --sidebar-border:       oklch(0.25 0 0);
-  --sidebar-ring:         oklch(0.40 0 0);
+  --sidebar:              oklch(0.15 0.04 255 / 0.74);
+  --sidebar-foreground:   oklch(0.96 0.012 245);
+  --sidebar-primary:      oklch(0.80 0.14 220);
+  --sidebar-primary-foreground: oklch(0.10 0.025 255);
+  --sidebar-accent:       oklch(0.24 0.06 260 / 0.70);
+  --sidebar-accent-foreground: oklch(0.96 0.012 245);
+  --sidebar-border:       oklch(0.92 0.025 245 / 0.12);
+  --sidebar-ring:         oklch(0.80 0.14 220);
 }
 
 @layer base {
@@ -91,7 +91,7 @@
   body { @apply bg-background text-foreground; }
   button, [role="button"] { cursor: pointer; }
 
-  /* Selection color — brand orange tint */
+  /* Selection color: cool glass accent. */
   ::selection {
     background: rgba(181, 75, 0, 0.18);
     color: inherit;
@@ -123,13 +123,13 @@
   --color-blue-light: #fff5ed;
   --color-blue-light-hover: #ffeedd;
   --color-blue-light-active: #ffd9b8;
-  --color-blue-normal: #b54b00;
-  --color-blue-normal-hover: #9e4200;
-  --color-blue-normal-active: #8a3a00;
-  --color-blue-dark: #7a3300;
-  --color-blue-dark-hover: #622900;
-  --color-blue-dark-active: #4a1f00;
-  --color-blue-darker: #341600;
+  --color-blue-normal: #22d3ee;
+  --color-blue-normal-hover: #67e8f9;
+  --color-blue-normal-active: #0891b2;
+  --color-blue-dark: #2563eb;
+  --color-blue-dark-hover: #4f46e5;
+  --color-blue-dark-active: #4338ca;
+  --color-blue-darker: #111827;
 
   --font-satoshi: 'Satoshi', sans-serif;
   --font-cabinet: 'Cabinet Grotesk', sans-serif;
@@ -139,21 +139,21 @@
   :root {
     --landing-content-width: calc(100vw - 1rem);
     --landing-section-gap: 3rem;
-    --color-1: #b54b00;
-    --color-2: hsl(30 100% 45%);
-    --color-3: hsl(20 90% 40%);
-    --color-4: hsl(15 85% 35%);
-    --color-5: hsl(35 100% 50%);
+    --color-1: #22d3ee;
+    --color-2: #6366f1;
+    --color-3: #a855f7;
+    --color-4: #14b8a6;
+    --color-5: #e0f2fe;
     
     --foreground: oklch(0.13 0 0);
   }
 
   .dark {
-    --color-1: #b54b00;
-    --color-2: hsl(30 100% 45%);
-    --color-3: hsl(20 90% 40%);
-    --color-4: hsl(15 85% 35%);
-    --color-5: hsl(35 100% 50%);
+    --color-1: #22d3ee;
+    --color-2: #6366f1;
+    --color-3: #a855f7;
+    --color-4: #14b8a6;
+    --color-5: #e0f2fe;
   }
 
   @keyframes organic-blob-a {
@@ -215,6 +215,27 @@
     transform-origin: top center;
   }
 
+  .glass-panel {
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.10), rgba(255, 255, 255, 0.045)),
+      rgba(8, 13, 31, 0.62);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.16),
+      0 24px 80px rgba(8, 13, 31, 0.42);
+    backdrop-filter: blur(22px);
+  }
+
+  .aurora-grid {
+    background-image:
+      radial-gradient(circle at 16% 20%, rgba(34, 211, 238, 0.24), transparent 28rem),
+      radial-gradient(circle at 84% 8%, rgba(168, 85, 247, 0.22), transparent 26rem),
+      radial-gradient(circle at 60% 82%, rgba(20, 184, 166, 0.14), transparent 28rem),
+      linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px);
+    background-size: auto, auto, auto, 42px 42px, 42px 42px;
+  }
+
   @media (prefers-reduced-motion: reduce) {
     .landing-navbar-scroll {
       transition: none;
@@ -272,52 +293,47 @@
   }
 }
 
-/* ── Light theme overrides ──────────────────────────────────────────────────
-   Must be unlayered and placed AFTER the :root,.dark block to win the cascade.
-   The :root,.dark block above sets dark-theme values for all tokens; these
-   rules re-set every token to standard shadcn light-theme values so the
-   landing page (and any light-mode surface) renders correctly on #F9FAFC. */
+/* Final token overrides keep light/dark inside the same futurist system. */
 :root {
-  --background:            #F9FAFC;
-  --foreground:            oklch(0.13 0 0);
-  --card:                  #ffffff;
-  --card-foreground:       oklch(0.13 0 0);
-  --popover:               #ffffff;
-  --popover-foreground:    oklch(0.13 0 0);
-  --primary:               oklch(0.13 0 0);
-  --primary-foreground:    oklch(0.98 0 0);
-  --secondary:             oklch(0.96 0 0);
-  --secondary-foreground:  oklch(0.13 0 0);
-  --muted:                 oklch(0.96 0 0);
-  --muted-foreground:      oklch(0.42 0 0);
-  --accent:                oklch(0.96 0 0);
-  --accent-foreground:     oklch(0.13 0 0);
-  --border:                oklch(0.90 0 0);
-  --input:                 oklch(0.90 0 0);
-  --ring:                  oklch(0.55 0 0);
-  --sidebar:               #ffffff;
-  --sidebar-foreground:    oklch(0.13 0 0);
+  --background:            #08111F;
+  --foreground:            #E8F7FF;
+  --card:                  rgba(15,23,42,0.72);
+  --card-foreground:       #E8F7FF;
+  --popover:               rgba(15,23,42,0.96);
+  --popover-foreground:    #E8F7FF;
+  --primary:               #67E8F9;
+  --primary-foreground:    #020617;
+  --secondary:             rgba(255,255,255,0.08);
+  --secondary-foreground:  #E8F7FF;
+  --muted:                 rgba(148,163,184,0.12);
+  --muted-foreground:      #94A3B8;
+  --accent:                rgba(34,211,238,0.12);
+  --accent-foreground:     #E8F7FF;
+  --border:                rgba(255,255,255,0.12);
+  --input:                 rgba(255,255,255,0.12);
+  --ring:                  #67E8F9;
+  --sidebar:               rgba(15,23,42,0.72);
+  --sidebar-foreground:    #E8F7FF;
 }
 
-/* Dark-mode restores the original dark palette */
 .dark {
-  --background:            oklch(0.13 0 0);
-  --foreground:            oklch(0.98 0 0);
-  --card:                  oklch(0.16 0 0);
-  --card-foreground:       oklch(0.98 0 0);
-  --popover:               oklch(0.16 0 0);
-  --popover-foreground:    oklch(0.98 0 0);
-  --primary:               oklch(0.98 0 0);
-  --primary-foreground:    oklch(0.13 0 0);
-  --secondary:             oklch(0.20 0 0);
-  --secondary-foreground:  oklch(0.98 0 0);
-  --muted:                 oklch(0.20 0 0);
-  --muted-foreground:      oklch(0.70 0 0);
-  --accent:                oklch(0.20 0 0);
-  --accent-foreground:     oklch(0.98 0 0);
-  --border:                oklch(0.25 0 0);
-  --input:                 oklch(0.25 0 0);
-  --ring:                  oklch(0.40 0 0);
-  --sidebar:               oklch(0.16 0 0);
-  --sidebar-foreground:    oklch(0.98 0 0);
+  --background:            #050814;
+  --foreground:            #E8F7FF;
+  --card:                  rgba(15,23,42,0.72);
+  --card-foreground:       #E8F7FF;
+  --popover:               rgba(15,23,42,0.96);
+  --popover-foreground:    #E8F7FF;
+  --primary:               #67E8F9;
+  --primary-foreground:    #020617;
+  --secondary:             rgba(255,255,255,0.08);
+  --secondary-foreground:  #E8F7FF;
+  --muted:                 rgba(148,163,184,0.12);
+  --muted-foreground:      #94A3B8;
+  --accent:                rgba(34,211,238,0.12);
+  --accent-foreground:     #E8F7FF;
+  --border:                rgba(255,255,255,0.12);
+  --input:                 rgba(255,255,255,0.12);
+  --ring:                  #67E8F9;
+  --sidebar:               rgba(15,23,42,0.72);
+  --sidebar-foreground:    #E8F7FF;
 }

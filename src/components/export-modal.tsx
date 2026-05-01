@@ -153,22 +153,21 @@ export function ExportModal({ open, onClose }: ExportModalProps) {
             onClick={(e) => e.stopPropagation()}
             className={cn(
               "relative w-full max-w-sm flex flex-col overflow-hidden",
-              "rounded-2xl",
-              "bg-white dark:bg-zinc-900",
-              "border border-[#E5E5E5] dark:border-zinc-700",
-              "shadow-[0px_24px_48px_rgba(0,0,0,0.18),0px_8px_16px_rgba(0,0,0,0.10)]",
+              "rounded-[1.5rem]",
+              "glass-panel",
+              "shadow-[0px_24px_80px_rgba(2,6,23,0.58)]",
             )}
           >
             {/* Header */}
-            <div className="flex items-center justify-between px-5 py-4 border-b border-[#E5E5E5] dark:border-zinc-800">
-              <h2 className="font-sans text-sm font-semibold tracking-wide text-[#111] dark:text-zinc-100">
+            <div className="flex items-center justify-between border-b border-white/10 px-5 py-4">
+              <h2 className="font-sans text-sm font-semibold tracking-wide text-white">
                 Export
               </h2>
               <button
                 type="button"
                 onClick={onClose}
                 aria-label="Close"
-                className="flex size-7 items-center justify-center rounded-md text-[#888] dark:text-zinc-400 hover:bg-[#F9FAFC] dark:hover:bg-zinc-800 transition-colors"
+                className="flex size-7 items-center justify-center rounded-lg text-slate-400 transition-colors hover:bg-white/[0.08] hover:text-cyan-100"
               >
                 <X className="size-4" />
               </button>
@@ -218,8 +217,8 @@ export function ExportModal({ open, onClose }: ExportModalProps) {
                           "flex items-center gap-3 rounded-xl px-3.5 py-3 text-left transition-all",
                           "border",
                           selected
-                            ? "border-[#B54B00] bg-[#FFF5ED] dark:bg-[#B54B00]/10 dark:border-[#B54B00]"
-                            : "border-[#E5E5E5] dark:border-zinc-700 bg-white dark:bg-zinc-800 hover:border-[#B54B00]/40",
+                            ? "border-cyan-300/50 bg-cyan-300/10"
+                            : "border-white/10 bg-white/[0.045] hover:border-cyan-300/35",
                           disabled && "opacity-40 cursor-not-allowed",
                         )}
                       >
@@ -227,13 +226,11 @@ export function ExportModal({ open, onClose }: ExportModalProps) {
                         <span
                           className={cn(
                             "flex size-4 shrink-0 items-center justify-center rounded-full border-2 transition-colors",
-                            selected
-                              ? "border-[#B54B00]"
-                              : "border-[#D6D6D6] dark:border-zinc-600",
+                            selected ? "border-cyan-300" : "border-white/20",
                           )}
                         >
                           {selected && (
-                            <span className="size-2 rounded-full bg-[#B54B00]" />
+                            <span className="size-2 rounded-full bg-cyan-300" />
                           )}
                         </span>
 
@@ -242,8 +239,8 @@ export function ExportModal({ open, onClose }: ExportModalProps) {
                           className={cn(
                             "flex size-8 shrink-0 items-center justify-center rounded-lg",
                             selected
-                              ? "bg-[#B54B00]/15 text-[#B54B00]"
-                              : "bg-[#F9FAFC] dark:bg-zinc-700 text-[#888] dark:text-zinc-400",
+                              ? "bg-cyan-300/15 text-cyan-100"
+                              : "bg-white/[0.06] text-slate-400",
                           )}
                         >
                           <Icon className="size-4" />
@@ -254,14 +251,12 @@ export function ExportModal({ open, onClose }: ExportModalProps) {
                           <span
                             className={cn(
                               "font-sans text-xs font-semibold",
-                              selected
-                                ? "text-[#B54B00]"
-                                : "text-[#111] dark:text-zinc-100",
+                              selected ? "text-cyan-100" : "text-slate-100",
                             )}
                           >
                             {label}
                           </span>
-                          <span className="font-sans text-[10px] text-[#888] dark:text-zinc-400 leading-tight">
+                          <span className="font-sans text-[10px] leading-tight text-slate-500">
                             {subtitle}
                           </span>
                         </span>
@@ -281,7 +276,7 @@ export function ExportModal({ open, onClose }: ExportModalProps) {
                 size="sm"
                 onClick={handleCopy}
                 disabled={isExporting}
-                className="w-full h-9 rounded-full font-sans text-[11px] font-semibold tracking-wide text-[#B54B00] gap-2"
+                className="w-full h-9 rounded-full font-sans text-[11px] font-semibold tracking-wide text-cyan-100 gap-2"
               >
                 <Copy className="size-3.5" />
                 Copy Code
@@ -294,7 +289,7 @@ export function ExportModal({ open, onClose }: ExportModalProps) {
                   variant="outline"
                   size="sm"
                   onClick={onClose}
-                  className="flex-1 h-9 rounded-full font-sans text-[11px] font-semibold tracking-wide border-[#E5E5E5] dark:border-zinc-700"
+                  className="flex-1 h-9 rounded-full border-white/10 font-sans text-[11px] font-semibold tracking-wide text-slate-200 hover:bg-white/[0.08]"
                 >
                   Cancel
                 </Button>

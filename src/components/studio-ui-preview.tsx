@@ -31,76 +31,78 @@ export default function StudioUiPreview() {
   const PREVIEW = {
     card: cn(
       "overflow-hidden rounded-xl border shadow-[0px_1px_2px_rgba(0,0,0,0.04)]",
-      isDark ? "border-zinc-700 bg-zinc-800" : "border-[#E5E5E5] bg-white",
+      isDark
+        ? "border-white/10 bg-slate-900/80"
+        : "border-white/10 bg-slate-900/80",
     ),
     cardHeader: cn(
       "border-b px-3 py-2.5",
       isDark
-        ? "border-zinc-700 bg-zinc-800"
-        : "border-[#E5E5E5] bg-[linear-gradient(180deg,#FFFFFF_0%,#F9FAFC_100%)]",
+        ? "border-white/10 bg-white/[0.045]"
+        : "border-white/10 bg-white/[0.045]",
     ),
     label: cn(
       "text-[10px] font-medium uppercase tracking-[0.12em]",
-      isDark ? "text-zinc-400" : "text-[#888]",
+      isDark ? "text-zinc-400" : "text-[#94a3b8]",
     ),
     labelNarrow: cn(
       "text-[9px] font-medium uppercase tracking-[0.12em]",
-      isDark ? "text-zinc-400" : "text-[#888]",
+      isDark ? "text-zinc-400" : "text-[#94a3b8]",
     ),
-    meta: cn("text-[10px]", isDark ? "text-zinc-400" : "text-[#666]"),
+    meta: cn("text-[10px]", isDark ? "text-zinc-400" : "text-[#94a3b8]"),
     valueMono: cn(
       "text-[10px] font-mono tabular-nums",
-      isDark ? "text-zinc-400" : "text-[#666]",
+      isDark ? "text-zinc-400" : "text-[#94a3b8]",
     ),
     field: cn(
-      "h-7 text-[10px] shadow-none focus-visible:border-[#B54B00] focus-visible:ring-[#B54B00]/20",
+      "h-7 text-[10px] shadow-none focus-visible:border-[#22d3ee] focus-visible:ring-[#22d3ee]/20",
       isDark
-        ? "border-zinc-700 bg-zinc-900 text-zinc-100"
-        : "border-[#E5E5E5] bg-white text-[#111]",
+        ? "border-white/10 bg-white/[0.06] text-slate-100"
+        : "border-white/10 bg-white/[0.06] text-slate-100",
     ),
     slider: STUDIO_SLIDER_CLASS,
-    sectionBg: isDark ? "bg-zinc-900" : "bg-white",
+    sectionBg: "bg-slate-950/30",
     wrapperBg: isDark
-      ? "bg-zinc-900 text-zinc-100 border-zinc-700"
-      : "bg-[linear-gradient(180deg,#FFFFFF_0%,#FCFCFD_100%)] text-[#111] border-[#E5E5E5]",
+      ? "bg-slate-950/70 text-slate-100 border-white/10"
+      : "bg-slate-950/70 text-slate-100 border-white/10",
     previewCanvasBg: isDark
-      ? "bg-zinc-950 border-zinc-700"
-      : "bg-[#F9FAFC] border-[#E5E5E5]",
+      ? "bg-slate-950 border-white/10"
+      : "bg-slate-950 border-white/10",
     previewFooterBg: isDark
-      ? "bg-zinc-800 border-zinc-700"
-      : "bg-[#F9FAFC] border-[#E5E5E5]",
-    statBorder: isDark ? "border-zinc-700" : "border-[#E5E5E5]",
-    statHover: isDark ? "hover:bg-zinc-700" : "hover:bg-[#F9FAFC]",
-    statText: isDark ? "text-zinc-100" : "text-[#111]",
+      ? "bg-white/[0.045] border-white/10"
+      : "bg-white/[0.045] border-white/10",
+    statBorder: "border-white/10",
+    statHover: "hover:bg-white/[0.06]",
+    statText: "text-slate-100",
     uploadBg: isDark
-      ? "bg-zinc-900 border-[#B54B00]/40 text-zinc-400 hover:border-[#B54B00]/60 hover:bg-[#2A1800]/40"
-      : "bg-[#F9FAFC] border-[#B54B00]/40 text-[#666] hover:border-[#B54B00]/60 hover:bg-[#FFF5ED]/80",
+      ? "bg-white/[0.045] border-cyan-300/35 text-slate-400 hover:border-cyan-200/60 hover:bg-cyan-300/10"
+      : "bg-white/[0.045] border-cyan-300/35 text-slate-400 hover:border-cyan-200/60 hover:bg-cyan-300/10",
     fileMeta: isDark
-      ? "border-zinc-700 bg-zinc-900 text-zinc-400"
-      : "border-[#E5E5E5] bg-white text-[#666]",
+      ? "border-white/10 bg-white/[0.045] text-slate-400"
+      : "border-white/10 bg-white/[0.045] text-slate-400",
     selectContent: isDark
-      ? "rounded-xl border-zinc-700 bg-zinc-800 text-zinc-100 shadow-[0px_14px_36px_rgba(0,0,0,0.3)]"
-      : "rounded-xl border-[#E5E5E5] bg-white text-[#111] shadow-[0px_14px_36px_rgba(0,0,0,0.12)]",
+      ? "rounded-xl border-white/10 bg-slate-950 text-slate-100 shadow-[0px_14px_36px_rgba(0,0,0,0.3)]"
+      : "rounded-xl border-white/10 bg-slate-950 text-slate-100 shadow-[0px_14px_36px_rgba(0,0,0,0.3)]",
     selectItem: isDark
       ? "rounded-lg py-2 text-[11px] font-medium text-zinc-100 data-[highlighted]:bg-zinc-700 data-[highlighted]:text-zinc-100 focus:bg-zinc-700 focus:text-zinc-100 data-[state=checked]:bg-zinc-700 data-[state=checked]:text-zinc-100"
-      : "rounded-lg py-2 text-[11px] font-medium text-[#111] data-[highlighted]:bg-[#FFF5ED] data-[highlighted]:text-[#111] focus:bg-[#FFF5ED] focus:text-[#111] data-[state=checked]:bg-[#FFF5ED] data-[state=checked]:text-[#111]",
+      : "rounded-lg py-2 text-[11px] font-medium text-[#e2e8f0] data-[highlighted]:bg-[#0e7490] data-[highlighted]:text-[#e2e8f0] focus:bg-[#0e7490] focus:text-[#e2e8f0] data-[state=checked]:bg-[#0e7490] data-[state=checked]:text-[#e2e8f0]",
     outlineBtn: isDark
-      ? "border-zinc-700 bg-zinc-800 text-zinc-100 hover:bg-zinc-700"
-      : "border-[#D8D8D8] bg-white text-[#111] hover:bg-[#F9FAFC]",
-    fontSearchBtn: isDark ? "bg-zinc-700" : "bg-[#F3F3F3]",
-    fontSearchIcon: isDark ? "text-zinc-400" : "text-[#777]",
+      ? "border-white/10 bg-white/[0.06] text-slate-100 hover:bg-cyan-300/10"
+      : "border-white/10 bg-white/[0.06] text-slate-100 hover:bg-cyan-300/10",
+    fontSearchBtn: isDark ? "bg-zinc-700" : "bg-[#1e293b]",
+    fontSearchIcon: isDark ? "text-zinc-400" : "text-[#94a3b8]",
     textarea: isDark
-      ? "border-zinc-700 bg-zinc-900 text-zinc-100"
-      : "border-[#DCDCDC] bg-[linear-gradient(180deg,#FDFDFD_0%,#F7F7F9_100%)] text-[#1F1F1F]",
+      ? "border-white/10 bg-slate-950/70 text-slate-100"
+      : "border-white/10 bg-slate-950/70 text-slate-100",
     componentBtn: isDark
-      ? "border-[#7A3300]/60 bg-[#2A1800] text-[#FFAB70] hover:bg-[#3A2000]"
-      : "border-[#EBC6A5] bg-[#FFF5ED] text-[#7A3300] hover:bg-[#FFECDD]",
+      ? "border-cyan-300/40 bg-cyan-300/10 text-cyan-100 hover:bg-cyan-300/15"
+      : "border-cyan-300/40 bg-cyan-300/10 text-cyan-100 hover:bg-cyan-300/15",
     resetBtn: isDark
       ? "text-zinc-300 hover:bg-zinc-700"
-      : "text-[#111] hover:bg-[#F9FAFC]",
+      : "text-[#e2e8f0] hover:bg-[#0f172a]",
     colorPillBg: isDark
-      ? "border-zinc-700 bg-zinc-800 text-zinc-100"
-      : "border-[#D8D8D8] bg-white text-[#111]",
+      ? "border-white/10 bg-white/[0.06] text-slate-100"
+      : "border-white/10 bg-white/[0.06] text-slate-100",
   };
 
   const outlineTertiary = STUDIO_OUTLINE_TERTIARY;
@@ -125,7 +127,7 @@ export default function StudioUiPreview() {
                   PREVIEW.uploadBg,
                 )}
               >
-                <Upload className="h-3.5 w-3.5 text-[#B54B00]/80" />
+                <Upload className="h-3.5 w-3.5 text-[#22d3ee]/80" />
                 Drag and drop, click to upload
               </button>
               <div
@@ -266,8 +268,8 @@ export default function StudioUiPreview() {
                     PREVIEW.colorPillBg,
                   )}
                 >
-                  <span className="size-3 rounded-full bg-[#B54B00]" />
-                  #B54B00
+                  <span className="size-3 rounded-full bg-[#22d3ee]" />
+                  #22d3ee
                 </button>
                 <button
                   type="button"
@@ -279,12 +281,10 @@ export default function StudioUiPreview() {
                   <span
                     className={cn(
                       "size-3 rounded-full border",
-                      isDark
-                        ? "border-zinc-600 bg-zinc-900"
-                        : "border-[#CFCFCF] bg-white",
+                      "border-white/10 bg-slate-950",
                     )}
                   />
-                  {isDark ? "#18181B" : "#FFFFFF"}
+                  {isDark ? "#18181B" : "#0f172a"}
                 </button>
               </div>
             </Panel>
@@ -293,7 +293,7 @@ export default function StudioUiPreview() {
               <Label
                 className={cn(
                   "px-1 text-center text-[9px] font-medium uppercase tracking-[0.1em] leading-relaxed",
-                  isDark ? "text-zinc-500" : "text-[#7A7A7A]",
+                  "text-slate-500",
                 )}
               >
                 Full React component with in-app text frame exports
@@ -367,7 +367,7 @@ export default function StudioUiPreview() {
                 <span
                   className={cn(
                     "text-[11px] font-semibold uppercase tracking-wider",
-                    isDark ? "text-zinc-100" : "text-[#111]",
+                    "text-slate-100",
                   )}
                 >
                   Preview
@@ -380,7 +380,7 @@ export default function StudioUiPreview() {
               <div
                 className={cn(
                   "overflow-hidden p-3 lg:flex-1",
-                  isDark ? "bg-zinc-800" : "bg-white",
+                  "bg-slate-950/30",
                 )}
               >
                 <div
@@ -468,7 +468,7 @@ function Panel({
         <span
           className={cn(
             "text-[11px] font-semibold uppercase tracking-wider",
-            isDark ? "text-zinc-100" : "text-[#111]",
+            isDark ? "text-zinc-100" : "text-[#e2e8f0]",
           )}
         >
           {title}

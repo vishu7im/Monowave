@@ -86,8 +86,9 @@ export function ImagesBadge({
         <div
           className="absolute inset-0"
           style={{
-            background: "#B54B00",
-            boxShadow: "inset 0px 0px 4px 2px rgba(255, 245, 237, 0.35)",
+            background: "#22d3ee",
+            boxShadow:
+              "inset 0px 0px 10px 2px rgba(255,255,255,0.26), 0 18px 50px rgba(34,211,238,0.20)",
             borderRadius: "14px",
           }}
         >

@@ -154,7 +154,7 @@ export default function Fire() {
           letterSpacing: 0,
           lineHeight: 0.78,
           showFrameCounter: false,
-          textColor: "#B54B00",
+          textColor: "#22d3ee",
           textEffect: "none",
           useColors: false,
           textEffectThreshold: 0,

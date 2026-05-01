@@ -1,195 +1,121 @@
 "use client";
 
 import Link from "next/link";
-import React, { useEffect, useState } from "react";
-import { useTheme } from "@/components/theme-provider";
-import { Button } from "../ui/button";
+import Image from "next/image";
+import { useEffect, useState } from "react";
 import { ChevronRight, Menu, X } from "lucide-react";
-import {
-  NavigationMenu,
-  NavigationMenuItem,
-  NavigationMenuLink,
-  NavigationMenuList,
-} from "../ui/navigation-menu";
+
+import { Button } from "@/components/ui/button";
 import { siteConfig } from "@/lib/site";
+
+const navItems = [
+  { href: "/#pricing", label: "Pricing" },
+  { href: "/showcase", label: "Showcase" },
+];
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const { theme } = useTheme();
-  const isDark = theme === "dark";
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 10);
-    };
+    const handleScroll = () => setScrolled(window.scrollY > 12);
+    handleScroll();
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
-    <div className="landing-navbar-scroll fixed top-6 z-50">
-      {/* Main navbar bar */}
+    <div className="fixed left-1/2 top-5 z-50 w-[min(1120px,calc(100vw-1.5rem))] -translate-x-1/2">
       <div
-        className={`flex justify-between items-center p-3 rounded-full border transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] ${
-          scrolled
-            ? isDark
-              ? "bg-[#26262E]/85 border-[#36363F] backdrop-blur-sm shadow-sm"
-              : "bg-white/80 border-black/[0.08] backdrop-blur-sm shadow-sm"
-            : "bg-transparent border-transparent backdrop-blur-none shadow-none"
+        className={`glass-panel flex items-center justify-between rounded-2xl px-3 py-2 transition-all duration-300 ${
+          scrolled ? "shadow-[0_18px_70px_rgba(2,6,23,0.55)]" : ""
         }`}
       >
-        <section className="flex justify-center items-center gap-x-6">
-          <Link
-            href="/"
-            className="shrink-0 flex items-center gap-2 transition-all duration-300 hover:opacity-80"
-          >
-            <img
-              src={siteConfig.logoPath}
-              alt="Logo"
-              className="object-contain w-10 h-10 aspect-square rounded-xl lg:h-12 lg:w-12"
-              width={48}
-              height={48}
-            />
-            <span className="[font-family:var(--font-ascii-brand)] text-base lg:text-xl whitespace-nowrap font-medium text-[#111] dark:text-zinc-100 tracking-wide">
-              {siteConfig.productName}
-            </span>
-          </Link>
-          <NavigationMenu className="z-50 hidden lg:flex">
-            <NavigationMenuList>
-              <NavigationMenuItem>
-                <NavigationMenuLink className="px-4" asChild>
-                  <Link
-                    href="/#pricing"
-                    className="text-sm text-muted-foreground dark:text-[#B9BAC6] hover:text-black dark:hover:text-[#F2F2F7] transition-colors duration-300"
-                  >
-                    Pricing
-                  </Link>
-                </NavigationMenuLink>
-              </NavigationMenuItem>
+        <Link
+          href="/"
+          className="flex min-w-0 items-center gap-3 rounded-xl px-1.5 py-1 transition-opacity hover:opacity-85"
+        >
+          <Image
+            src={siteConfig.logoPath}
+            alt="Logo"
+            className="size-9 rounded-xl border border-white/10 bg-white/[0.06] object-contain p-1"
+            width={36}
+            height={36}
+          />
+          <span className="[font-family:var(--font-ascii-brand)] truncate text-base font-medium tracking-wide text-white">
+            {siteConfig.productName}
+          </span>
+        </Link>
 
-              <NavigationMenuItem>
-                <NavigationMenuLink className="px-4" asChild>
-                  <Link
-                    href="/showcase"
-                    className="text-sm text-muted-foreground dark:text-[#B9BAC6] hover:text-black dark:hover:text-[#F2F2F7] transition-colors duration-300"
-                  >
-                    Showcase
-                  </Link>
-                </NavigationMenuLink>
-              </NavigationMenuItem>
-            </NavigationMenuList>
-          </NavigationMenu>
-        </section>
-
-        {/* Desktop buttons */}
-        <section className="hidden lg:flex items-center gap-2">
-          <div className="relative group/repo flex items-center justify-center">
-            <div className="relative transition-transform duration-200 group-hover/repo:-translate-y-0.5">
-              <Link
-                href={siteConfig.githubUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="relative z-10 block w-fit"
-              >
-                <Button
-                  className="min-w-48 justify-center transition-all duration-200 hover:shadow-[0_10px_22px_rgba(181,75,0,0.2)]"
-                  variant="landing"
-                  size="landing"
-                >
-                  Give us a star
-                </Button>
-              </Link>
-              <span className="pointer-events-none absolute -inset-1 rounded-[999px] border border-[#B54B00]/35 opacity-0 group-hover/repo:opacity-100 transition-opacity duration-200" />
-            </div>
-          </div>
-          <Link href={siteConfig.studioPath} className="shrink-0">
-            <Button
-              className="group min-w-48 justify-center relative overflow-hidden transition-[padding] duration-200 hover:pr-10"
-              variant="landingBlue"
-              size="landing"
+        <nav className="hidden items-center rounded-full border border-white/10 bg-white/[0.045] px-2 py-1 lg:flex">
+          {navItems.map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              className="rounded-full px-4 py-2 text-sm text-slate-300 transition-colors hover:bg-white/[0.07] hover:text-cyan-100"
             >
-              Open studio
-              <ChevronRight className="w-4 absolute right-4 -translate-x-5 opacity-0 group-hover:translate-x-0 group-hover:opacity-100 transition-all duration-200" />
+              {item.label}
+            </Link>
+          ))}
+        </nav>
+
+        <div className="hidden items-center gap-2 lg:flex">
+          <Link href={siteConfig.githubUrl} target="_blank" rel="noreferrer">
+            <Button variant="landing" size="landing" className="h-10 px-4">
+              GitHub
             </Button>
           </Link>
-        </section>
+          <Link href={siteConfig.studioPath}>
+            <Button variant="landingBlue" size="landing" className="h-10 px-5">
+              Open studio
+              <ChevronRight className="size-4" />
+            </Button>
+          </Link>
+        </div>
 
-        {/* Mobile hamburger */}
         <button
           type="button"
-          className="lg:hidden p-2 rounded-full hover:bg-black/5 transition-colors"
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          className="grid size-10 place-items-center rounded-xl border border-white/10 bg-white/[0.06] text-slate-100 lg:hidden"
+          onClick={() => setMobileMenuOpen((value) => !value)}
           aria-label="Toggle menu"
         >
-          {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
+          {mobileMenuOpen ? <X size={18} /> : <Menu size={18} />}
         </button>
       </div>
 
-      {/* Mobile menu panel */}
       {mobileMenuOpen && (
-        <div
-          className={`lg:hidden mt-2 backdrop-blur-md rounded-2xl border shadow-lg p-4 flex flex-col gap-1 ${isDark ? "bg-[#26262E]/95 border-[#36363F]" : "bg-white/95 border-white/60"}`}
-        >
-          <Link
-            href="/studio"
-            className="py-2.5 px-3 rounded-xl hover:bg-accent text-sm font-medium transition-colors"
-            onClick={() => setMobileMenuOpen(false)}
-          >
-            Tools
-          </Link>
-          <Link
-            href="/faq"
-            className="py-2.5 px-3 rounded-xl hover:bg-accent text-sm font-medium transition-colors"
-            onClick={() => setMobileMenuOpen(false)}
-          >
-            FAQs
-          </Link>
-          <Link
-            href="/#pricing"
-            className="py-2.5 px-3 rounded-xl hover:bg-accent text-sm font-medium transition-colors"
-            onClick={() => setMobileMenuOpen(false)}
-          >
-            Pricing
-          </Link>
-          <Link
-            href="/showcase"
-            className="py-2.5 px-3 rounded-xl hover:bg-accent text-sm font-medium transition-colors"
-            onClick={() => setMobileMenuOpen(false)}
-          >
-            Showcase
-          </Link>
-          <div className="flex gap-2 pt-2 border-t border-border mt-1">
-            <div className="relative group/repo flex-1 flex items-center justify-center">
-              <div className="relative w-full transition-transform duration-200 group-hover/repo:-translate-y-0.5">
-                <Link
-                  href={siteConfig.githubUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="relative z-10 block w-full"
-                >
-                  <Button
-                    className="w-full transition-all duration-200 hover:shadow-[0_10px_22px_rgba(181,75,0,0.2)]"
-                    variant="landing"
-                    size="landing"
-                  >
-                    Give us a star
-                  </Button>
-                </Link>
-                <span className="pointer-events-none absolute -inset-1 rounded-[999px] border border-[#B54B00]/35 opacity-0 group-hover/repo:opacity-100 transition-opacity duration-200" />
-              </div>
-            </div>
-            <Link href={siteConfig.studioPath} className="flex-1">
-              <Button
-                className="group w-full relative overflow-hidden transition-[padding] duration-200 hover:pr-10"
-                variant="landingBlue"
-                size="landing"
-              >
-                Open studio
-                <ChevronRight className="w-4 absolute right-4 -translate-x-5 opacity-0 group-hover:translate-x-0 group-hover:opacity-100 transition-all duration-200" />
-              </Button>
+        <div className="glass-panel mt-2 flex flex-col gap-1 rounded-2xl p-3 lg:hidden">
+          {navItems.map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              className="rounded-xl px-3 py-3 text-sm text-slate-200 hover:bg-white/[0.07]"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              {item.label}
             </Link>
-          </div>
+          ))}
+          <Link
+            href={siteConfig.githubUrl}
+            target="_blank"
+            rel="noreferrer"
+            className="rounded-xl px-3 py-3 text-sm text-slate-200 hover:bg-white/[0.07]"
+          >
+            GitHub
+          </Link>
+          <Link
+            href={siteConfig.studioPath}
+            onClick={() => setMobileMenuOpen(false)}
+          >
+            <Button
+              variant="landingBlue"
+              size="landing"
+              className="mt-2 w-full"
+            >
+              Open studio
+              <ChevronRight className="size-4" />
+            </Button>
+          </Link>
         </div>
       )}
     </div>

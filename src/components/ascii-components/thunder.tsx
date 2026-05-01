@@ -62,7 +62,7 @@ export const APPEARANCE = {
   letterSpacing: -0.18,
   lineHeight: 0.65,
   showFrameCounter: true,
-  textColor: "#B54B00",
+  textColor: "#22d3ee",
   textEffect: "none",
   useColors: false,
   textEffectThreshold: 0,
