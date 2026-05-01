@@ -1,0 +1,381 @@
+"use client";
+import { Check } from "lucide-react";
+import React, { useEffect, useRef, useState } from "react";
+import { AnimatePresence, motion, type Variants } from "framer-motion";
+import { useTheme } from "@/components/theme-provider";
+import { DmOnXButton } from "@/components/landing-ui/dm-on-x-button";
+
+const ASCII_FREE = [
+  " ░░░░░░░░░░░░░ ",
+  "░  ▒▒▒▒▒▒▒▒▒  ░",
+  "░ ▒  ·  ·  ▒ ░",
+  "░ ▒  ASCII  ▒ ░",
+  "░ ▒  STUDIO ▒ ░",
+  "░  ▒▒▒▒▒▒▒▒▒  ░",
+  " ░░░░░░░░░░░░░ ",
+];
+
+const ASCII_PRO = [
+  "╔═══════════════╗",
+  "║  ┌─────────┐  ║",
+  "║  │ ▓▓▓▓▓▓▓ │  ║",
+  "║  │ ▓ PRO ▓ │  ║",
+  "║  │ ▓▓▓▓▓▓▓ │  ║",
+  "║  └─────────┘  ║",
+  "╚═══════════════╝",
+];
+
+const AsciiVisual = ({ tier }: { tier: "monthly" | "yearly" }) => {
+  const frames = tier === "yearly" ? ASCII_PRO : ASCII_FREE;
+  const [activeRow, setActiveRow] = useState(0);
+  const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
+
+  useEffect(() => {
+    intervalRef.current = setInterval(() => {
+      setActiveRow((p) => (p + 1) % frames.length);
+    }, 380);
+    return () => {
+      if (intervalRef.current) clearInterval(intervalRef.current);
+    };
+  }, [frames.length]);
+
+  return (
+    <div className="h-full w-full flex items-center justify-center p-4">
+      <pre
+        className="select-none leading-relaxed text-sm font-mono"
+        style={{ color: tier === "yearly" ? "#B54B00" : "#888" }}
+      >
+        {frames.map((row, i) => (
+          <div
+            key={i}
+            style={{
+              opacity: i === activeRow ? 1 : 0.45,
+              fontWeight: i === activeRow ? 700 : 400,
+              transition: "opacity 0.3s ease, font-weight 0.3s ease",
+            }}
+          >
+            {row}
+          </div>
+        ))}
+      </pre>
+    </div>
+  );
+};
+
+const Pricing = () => {
+  const sideColumnWidthPx = 260;
+  const [isPricingPanelHovered, setIsPricingPanelHovered] = useState(false);
+  const [activeTab, setActiveTab] = useState<"monthly" | "yearly">("monthly");
+  const { theme } = useTheme();
+  const isDark = theme === "dark";
+  const cardBg = isDark ? "#26262E" : "#FFFFFF";
+  const innerBg = isDark ? "#2E2E38" : "#F5F5F5";
+  const outerBg = isDark ? "#222228" : "#F3F3F3";
+
+  const contentVariants: Variants = {
+    hidden: { opacity: 0, y: 16 },
+    show: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.25,
+        ease: "easeOut",
+        when: "beforeChildren",
+        staggerChildren: 0.08,
+      },
+    },
+    exit: {
+      opacity: 0,
+      y: -16,
+      transition: {
+        duration: 0.18,
+        ease: "easeIn",
+      },
+    },
+  };
+
+  const sectionVariants: Variants = {
+    hidden: { opacity: 0, y: 10 },
+    show: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.22, ease: "easeOut" },
+    },
+    exit: {
+      opacity: 0,
+      y: -10,
+      transition: { duration: 0.14, ease: "easeIn" },
+    },
+  };
+
+  const pointsContainerVariants: Variants = {
+    hidden: {},
+    show: {
+      transition: {
+        staggerChildren: 0.05,
+        delayChildren: 0.04,
+      },
+    },
+    exit: {
+      transition: {
+        staggerChildren: 0.02,
+        staggerDirection: -1,
+      },
+    },
+  };
+
+  const pointVariants: Variants = {
+    hidden: { opacity: 0, y: 8 },
+    show: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.18, ease: "easeOut" },
+    },
+    exit: {
+      opacity: 0,
+      y: -8,
+      transition: { duration: 0.12, ease: "easeIn" },
+    },
+  };
+  const monthlyPoints = [
+    "Generate high-quality ASCII art",
+    "Export PNG, TXT, and copyable code snippets",
+    "Access core style presets",
+    "Fast rendering for short-form content",
+    "Watermarked exports",
+    "Standard support",
+    "Great for trying Monowave",
+  ];
+  const yearlyPoints = [
+    "Everything in Monthly",
+    "Unlimited exports (PNG / TXT / code)",
+    "No watermark on outputs",
+    "Access premium style packs",
+    "Priority rendering + queue",
+    "Priority support",
+    "Save 20% with annual billing",
+  ];
+
+  return (
+    <div
+      id="pricing"
+      className="flex flex-col justify-center items-center scroll-mt-32"
+    >
+      <div
+        className="flex  p-1.5 justify-center items-center relative"
+        style={{
+          background: "#B54B00",
+          boxShadow:
+            "0px 0px 4px rgba(0, 0, 0, 0.04), 0px 8px 16px rgba(0, 0, 0, 0.08), inset 2px 3px 3.5px rgba(255, 255, 255, 0.18)",
+          borderRadius: "99px",
+        }}
+      >
+        <button
+          className="relative px-4 py-3 flex justify-center items-center font-medium"
+          style={{ borderRadius: "99px", zIndex: 1 }}
+          onClick={() => setActiveTab("monthly")}
+        >
+          {activeTab === "monthly" && (
+            <motion.div
+              layoutId="pricing-tab-pill"
+              className="absolute inset-0"
+              style={{
+                background: "#F5F5F5",
+                boxShadow:
+                  "0px 4px 1px rgba(0, 0, 0, 0.01), 0px 2px 1px rgba(0, 0, 0, 0.05), 0px 1px 1px rgba(0, 0, 0, 0.09), 0px 0px 1px rgba(0, 0, 0, 0.1), inset 0px 2px 2.2px rgba(255,255,255,0.1)",
+                borderRadius: "99px",
+                zIndex: 0,
+              }}
+              transition={{ duration: 0.38, ease: [0.22, 1, 0.36, 1] }}
+              initial={false}
+            />
+          )}
+          <span
+            className="relative z-10"
+            style={{
+              color: activeTab === "monthly" ? "#222" : "#fff",
+            }}
+          >
+            Monthly
+          </span>
+        </button>
+        <button
+          className="relative px-4 py-3 flex justify-center items-center font-medium"
+          style={{ borderRadius: "99px", zIndex: 1 }}
+          onClick={() => setActiveTab("yearly")}
+        >
+          {activeTab === "yearly" && (
+            <motion.div
+              layoutId="pricing-tab-pill"
+              className="absolute inset-0"
+              style={{
+                background: "#F5F5F5",
+                boxShadow:
+                  "0px 4px 1px rgba(0, 0, 0, 0.01), 0px 2px 1px rgba(0, 0, 0, 0.05), 0px 1px 1px rgba(0, 0, 0, 0.09), 0px 0px 1px rgba(0, 0, 0, 0.1), inset 0px 2px 2.2px rgba(255,255,255,0.1)",
+                borderRadius: "99px",
+                zIndex: 0,
+              }}
+              transition={{ duration: 0.38, ease: [0.22, 1, 0.36, 1] }}
+              initial={false}
+            />
+          )}
+          <span
+            className="relative z-10"
+            style={{
+              color: activeTab === "yearly" ? "#222" : "#fff",
+            }}
+          >
+            Yearly (Save 20%)
+          </span>
+        </button>
+      </div>
+      <div
+        className="landing-content-width border mt-10 relative overflow-hidden"
+        onMouseEnter={() => setIsPricingPanelHovered(true)}
+        onMouseLeave={() => setIsPricingPanelHovered(false)}
+        style={{
+          background: outerBg,
+          boxShadow:
+            "0px 1px 0px rgba(255, 255, 255, 0.25), inset 0px 1px 2px 1px rgba(0, 0, 0, 0.15)",
+          borderRadius: "32px",
+        }}
+      >
+        <video
+          className="pointer-events-none absolute object-cover transition-opacity duration-300"
+          src="/pricing-bg.mp4"
+          autoPlay
+          loop
+          muted
+          playsInline
+          style={{
+            opacity: isPricingPanelHovered ? 1 : 0,
+            height: "100%",
+            width: "105%",
+            objectFit: "cover",
+          }}
+        />
+        <div
+          className="relative z-10 grid gap-4 p-4 grid-cols-1 items-stretch md:[grid-template-columns:1fr_var(--pricing-side-col)]"
+          style={
+            {
+              "--pricing-side-col": `${sideColumnWidthPx}px`,
+            } as React.CSSProperties
+          }
+        >
+          <motion.div
+            layout="position"
+            className="px-8 py-7"
+            style={{
+              background: cardBg,
+              boxShadow:
+                "0px 15px 6px rgba(0, 0, 0, 0.01), 0px 4px 4px rgba(0, 0, 0, 0.09), 0px 1px 2px rgba(0, 0, 0, 0.1)",
+              borderRadius: "16px",
+            }}
+          >
+            <AnimatePresence mode="wait" initial={false}>
+              <motion.div
+                key={activeTab}
+                className="overflow-hidden"
+                initial={{ height: 0, opacity: 0 }}
+                animate={{ height: "auto", opacity: 1 }}
+                exit={{ height: 0, opacity: 0 }}
+                transition={{
+                  height: { duration: 0.38, ease: [0.22, 1, 0.36, 1] },
+                  opacity: { duration: 0.2, ease: "easeOut" },
+                }}
+              >
+                <motion.div
+                  variants={contentVariants}
+                  initial="hidden"
+                  animate="show"
+                  exit="exit"
+                >
+                  <motion.div
+                    className="flex gap-2 items-center"
+                    variants={sectionVariants}
+                  >
+                    <span className=" font-medium text-2xl">
+                      {activeTab === "monthly" ? "Pay Monthly" : "Pay Yearly"}
+                    </span>{" "}
+                  </motion.div>
+                  <motion.div
+                    style={{ lineHeight: "120%" }}
+                    className="text-lg mt-3"
+                    variants={sectionVariants}
+                  >
+                    {activeTab === "monthly"
+                      ? "Perfect for creators getting started with Monowave. Build and export polished ASCII content with essential tools and flexible output options."
+                      : "Built for teams and power creators who need unlimited output, premium styles, faster turnaround, and the best long-term value."}
+                  </motion.div>
+                  <motion.div
+                    className="mt-6 flex flex-col gap-4"
+                    variants={pointsContainerVariants}
+                  >
+                    {(activeTab === "monthly"
+                      ? monthlyPoints
+                      : yearlyPoints
+                    ).map((point) => (
+                      <motion.div
+                        key={point}
+                        className="flex gap-1.5"
+                        variants={pointVariants}
+                      >
+                        <Check className="text-muted-foreground shrink-0 size-5 mt-0.5" />
+                        <span className="text">{point}</span>
+                      </motion.div>
+                    ))}
+                  </motion.div>
+                </motion.div>
+              </motion.div>
+            </AnimatePresence>
+          </motion.div>
+          <div
+            className="h-full"
+            style={{
+              background: cardBg,
+              boxShadow:
+                "0px 15px 6px rgba(0, 0, 0, 0.01), 0px 4px 4px rgba(0, 0, 0, 0.09), 0px 1px 2px rgba(0, 0, 0, 0.1)",
+              borderRadius: "16px",
+            }}
+          >
+            <div className="p-3 flex gap-3 flex-col h-full">
+              <div
+                className="h-full flex-1 border rounded-xl"
+                style={{
+                  background: innerBg,
+                  boxShadow:
+                    "0px 1px 0px rgba(255, 255, 255, 0.25), inset 0px 1px 2px rgba(0, 0, 0, 0.15)",
+                }}
+              >
+                <AnimatePresence mode="wait" initial={false}>
+                  <motion.div
+                    key={activeTab}
+                    className="h-full max-sm:min-h-[20vh]"
+                    initial={{ opacity: 0 }}
+                    animate={{
+                      opacity: 1,
+                      transition: {
+                        delay: 0.38,
+                        duration: 0.18,
+                        ease: [0.22, 1, 0.36, 1],
+                      },
+                    }}
+                    exit={{
+                      opacity: 0,
+                      transition: { duration: 0.05, ease: "linear" },
+                    }}
+                  >
+                    <AsciiVisual tier={activeTab} />
+                  </motion.div>
+                </AnimatePresence>
+              </div>
+              <DmOnXButton className="w-full rounded-xl" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Pricing;
