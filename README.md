@@ -160,6 +160,6 @@ bun run format
 
 ## Links
 
-- GitHub: [narsibhati-dev/Monowave](https://github.com/narsibhati-dev/Monowave)
-- X: [@marsihq](https://x.com/marsihq)
-- LinkedIn: [narsibhati](https://www.linkedin.com/in/narsibhati/)
+- GitHub: [vishu7im/Monowave](https://github.com/vishu7im/Monowave)
+- X: [@vishu7im](https://x.com/vishu7im)
+- LinkedIn: [vishal munday](https://www.linkedin.com/in/vishal-munday-869024223/)
